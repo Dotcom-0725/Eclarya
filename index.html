@@ -1,0 +1,899 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="إيكلاريا ECLARYA - متجر منتجات الجمال والعناية الفاخرة. سيروم، كريمات، زيوت طبيعية بجودة عالمية. توصيل سريع في المغرب." />
+  <meta name="keywords" content="إيكلاريا, ECLARYA, جمال, عناية بالبشرة, منتجات طبيعية, مغرب, سيروم, كريم" />
+  <meta property="og:title" content="إيكلاريا ECLARYA - الجمال والرفاهية" />
+  <meta property="og:description" content="اكتشفي مجموعة منتجات العناية الفاخرة من إيكلاريا. جودة عالمية، مكونات طبيعية، توصيل سريع." />
+  <title>ECLARYA إيكلاريا — الجمال والرفاهية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body class="lang-ar">
+
+<!-- ============================================
+     HEADER
+     ============================================ -->
+<header id="header">
+  <!-- Top Bar -->
+  <div class="header-top">
+    <div class="container">
+      <div class="contact-links">
+        <a href="tel:0661600929">📞 0661600929</a>
+        <a href="mailto:ouazatnet@gmail.com">✉️ ouazatnet@gmail.com</a>
+        <span>📍 طنجة، المغرب</span>
+      </div>
+      <div class="lang-switch">
+        <button class="lang-btn active" data-lang="ar" onclick="setLang('ar')">العربية</button>
+        <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">Français</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <!-- Logo -->
+      <a href="#" class="logo" onclick="navigateTo('home')">
+        <div class="logo-icon">E</div>
+        <div class="logo-text">
+          <div class="brand">ECLARYA</div>
+          <div class="tagline">الجمال والرفاهية</div>
+        </div>
+      </a>
+
+      <!-- Nav Links -->
+      <div class="nav-links">
+        <a href="#" data-page="home" data-nav="home" class="active" onclick="navigateTo('home')">الرئيسية</a>
+        <a href="#" data-page="about" data-nav="about" onclick="navigateTo('about')">من نحن</a>
+        <a href="#" data-page="products" data-nav="products" onclick="navigateTo('products')">المنتجات</a>
+        <a href="#" data-page="booking" data-nav="booking" onclick="navigateTo('booking')">الحجز</a>
+        <a href="#" data-page="faq" data-nav="faq" onclick="navigateTo('faq')">الأسئلة الشائعة</a>
+        <a href="#" data-page="contact" data-nav="contact" onclick="navigateTo('contact')">اتصل بنا</a>
+      </div>
+
+      <!-- Actions -->
+      <div class="nav-actions">
+        <button class="nav-icon-btn" onclick="openCart()" title="السلة">
+          🛒
+          <span class="cart-count" style="display:none">0</span>
+        </button>
+        <button class="hamburger" id="hamburger-btn">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <a href="#" data-nav="home" onclick="navigateTo('home');document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open')">الرئيسية</a>
+      <a href="#" data-nav="about" onclick="navigateTo('about');document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open')">من نحن</a>
+      <a href="#" data-nav="products" onclick="navigateTo('products');document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open')">المنتجات</a>
+      <a href="#" data-nav="booking" onclick="navigateTo('booking');document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open')">الحجز</a>
+      <a href="#" data-nav="faq" onclick="navigateTo('faq');document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open')">الأسئلة الشائعة</a>
+      <a href="#" data-nav="contact" onclick="navigateTo('contact');document.getElementById('mobile-menu').classList.remove('open');document.getElementById('hamburger-btn').classList.remove('open')">اتصل بنا</a>
+    </div>
+  </nav>
+</header>
+
+<!-- ============================================
+     HOME PAGE
+     ============================================ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero Slider -->
+  <section class="hero">
+    <div class="slides-container" id="slides-track">
+
+      <!-- Slide 1: Luxury Beauty Woman -->
+      <div class="slide">
+        <img src="https://images.unsplash.com/photo-1693004927824-f2623bbedc8b?w=1600&h=900&q=90&auto=format&fit=crop&crop=faces,center" alt="Luxury Skincare" class="slide-bg" style="object-fit:cover;opacity:0.60" />
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+          <div class="badge slide-badge slide-badge-1">✦ Natural Skincare — طبيعي 100%</div>
+          <h1 class="slide-title-1">اكتشفي <span class="text-gold">جمالك</span> الحقيقي مع إيكلاريا</h1>
+          <p class="slide-sub-1">سيروم كونتور العيون وكريم AHA المضيء — منتجات طبيعية 100% لبشرة مشرقة وصحية.</p>
+          <div class="slide-btns">
+            <button class="btn btn-gold btn-lg btn-shop-now" onclick="navigateTo('products')">تسوقي الآن</button>
+            <button class="btn btn-outline btn-learn-more" onclick="navigateTo('about')">اعرفي المزيد</button>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="product-showcase">
+            <div class="glow-ring"></div>
+            <div class="glow-ring"></div>
+            <img src="assets/images/eclarya-products.jpg" alt="Éclarya" onerror="this.src='https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&h=500&q=85&auto=format&fit=crop'" style="width:240px;height:320px;object-fit:cover;border-radius:16px;position:relative;z-index:2;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5))" />
+            <div class="float-badge">🌿 AHA طبيعي</div>
+            <div class="float-badge">💧 سيروم العيون</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Eye Serum -->
+      <div class="slide">
+        <img src="https://images.unsplash.com/photo-1728727267814-792db55ce678?w=1600&h=900&q=90&auto=format&fit=crop&crop=faces,center" alt="Skincare Glow" class="slide-bg" style="object-fit:cover;opacity:0.55" />
+        <div class="slide-overlay" style="background:linear-gradient(135deg,rgba(10,10,10,0.85) 0%,rgba(20,40,20,0.15) 70%)"></div>
+        <div class="slide-content">
+          <div class="badge slide-badge slide-badge-2">✦ سيروم كونتور العيون</div>
+          <h1 class="slide-title-2">عيون <span class="text-gold">أكثر</span> إشراقاً وشباباً</h1>
+          <p class="slide-sub-2">سيروم إيكلاريا المتخصص لمنطقة العيون — يقلل الهالات السوداء والانتفاخات بمكونات طبيعية فعّالة.</p>
+          <div class="slide-btns">
+            <button class="btn btn-gold btn-lg btn-shop-now" onclick="navigateTo('products')">اطلبيه الآن</button>
+            <button class="btn btn-outline btn-learn-more" onclick="navigateTo('product-detail',PRODUCTS[0])">عرض المنتج</button>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="product-showcase">
+            <div class="glow-ring"></div>
+            <div class="glow-ring"></div>
+            <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=500&q=85&auto=format&fit=crop" alt="Sérum" style="width:200px;height:300px;object-fit:cover;border-radius:16px;position:relative;z-index:2;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5))" />
+            <div class="float-badge">💧 Hyaluronic Acid</div>
+            <div class="float-badge">✨ Peptides</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Crème AHA -->
+      <div class="slide">
+        <img src="https://images.unsplash.com/photo-1679581356089-e65ea18c7f61?w=1600&h=900&q=90&auto=format&fit=crop&crop=faces,center" alt="Beauty Cream" class="slide-bg" style="object-fit:cover;opacity:0.55" />
+        <div class="slide-overlay" style="background:linear-gradient(135deg,rgba(10,10,10,0.85) 0%,rgba(10,30,10,0.15) 70%)"></div>
+        <div class="slide-content">
+          <div class="badge slide-badge slide-badge-3">✦ كريم AHA المضيء</div>
+          <h1 class="slide-title-3">بشرة <span class="text-gold">مضيئة</span> وموحدة اللون</h1>
+          <p class="slide-sub-3">كريم إيكلاريا بأحماض AHA الطبيعية — يضيء البشرة، يوحد لونها ويقشر بلطف فائق. 50ml.</p>
+          <div class="slide-btns">
+            <button class="btn btn-gold btn-lg btn-shop-now" onclick="navigateTo('products')">اطلبيه الآن</button>
+            <button class="btn btn-outline btn-learn-more" onclick="navigateTo('booking')">استشارة مجانية</button>
+          </div>
+        </div>
+        <div class="slide-visual">
+          <div class="product-showcase">
+            <div class="glow-ring"></div>
+            <div class="glow-ring"></div>
+            <img src="https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb0?w=400&h=500&q=85&auto=format&fit=crop" alt="Crème AHA" style="width:180px;height:320px;object-fit:cover;border-radius:16px;position:relative;z-index:2;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5))" />
+            <div class="float-badge">🌿 AHA Complex</div>
+            <div class="float-badge">✅ Éclaircit & Illumine</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Arrows -->
+    <button class="slide-arrow slide-prev" onclick="changeSlide(-1)">‹</button>
+    <button class="slide-arrow slide-next" onclick="changeSlide(1)">›</button>
+
+    <!-- Dots -->
+    <div class="slide-nav">
+      <div class="slide-dot active" onclick="goSlide(0)"></div>
+      <div class="slide-dot" onclick="goSlide(1)"></div>
+      <div class="slide-dot" onclick="goSlide(2)"></div>
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-items">
+        <div class="trust-item"><span class="icon">🚚</span> <span data-trust="1">شحن مجاني فوق 300 درهم</span></div>
+        <div class="trust-item"><span class="icon">✅</span> <span data-trust="2">منتجات أصيلة 100%</span></div>
+        <div class="trust-item"><span class="icon">↩️</span> <span data-trust="3">إرجاع مجاني 14 يوم</span></div>
+        <div class="trust-item"><span class="icon">🔒</span> <span data-trust="4">دفع آمن ومضمون</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Products -->
+  <section class="section" style="background:var(--white)">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">✦ الأكثر مبيعاً</span>
+        <h2>المنتجات المميزة</h2>
+        <p>اكتشفي مجموعة منتجاتنا المختارة بعناية لتناسب كل احتياجاتك</p>
+        <span class="gold-line"></span>
+      </div>
+      <div class="products-grid" id="featured-grid"></div>
+      <div style="text-align:center;margin-top:40px">
+        <button class="btn btn-outline btn-lg" onclick="navigateTo('products')">عرض جميع المنتجات ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section" style="background:var(--off-white)">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">✦ فئاتنا</span>
+        <h2>تسوقي حسب الفئة</h2>
+        <span class="gold-line"></span>
+      </div>
+      <div class="categories-grid" id="categories-grid"></div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge" style="border-color:rgba(201,168,76,0.4);color:var(--gold)">✦ مميزاتنا</span>
+        <h2 id="features-title" style="color:var(--white)">لماذا تختارين إيكلاريا؟</h2>
+        <span class="gold-line"></span>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🌿</div>
+          <h4 data-feat-title="1">جودة فائقة</h4>
+          <p data-feat-desc="1">منتجات مصنوعة من أجود المكونات الطبيعية المعتمدة دولياً</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🚀</div>
+          <h4 data-feat-title="2">شحن سريع</h4>
+          <p data-feat-desc="2">توصيل سريع لجميع أنحاء المغرب خلال 24-72 ساعة</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h4 data-feat-title="3">دعم واتساب</h4>
+          <p data-feat-desc="3">فريق دعم متخصص متاح 7 أيام عبر واتساب لمساعدتك</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✅</div>
+          <h4 data-feat-title="4">ضمان الرضا</h4>
+          <p data-feat-desc="4">إرجاع مجاني خلال 14 يوم إذا لم تكوني راضية تماماً</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge">✦ تقييمات حقيقية</span>
+        <h2>آراء عميلاتنا</h2>
+        <span class="gold-line"></span>
+      </div>
+      <div class="testimonials-slider">
+        <div class="testimonials-track" id="testimonials-track"></div>
+      </div>
+      <div class="testimonials-nav" id="testimonial-dots"></div>
+      <div style="display:flex;justify-content:center;gap:12px;margin-top:20px">
+        <button class="btn btn-outline btn-sm" onclick="changeTestimonial(-1)">‹</button>
+        <button class="btn btn-outline btn-sm" onclick="changeTestimonial(1)">›</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section-sm cta-banner">
+    <div class="container">
+      <div class="cta-content">
+        <span class="badge" style="border-color:rgba(201,168,76,0.4);color:var(--gold);margin-bottom:20px">✦ ابدئي الآن</span>
+        <h2 id="cta-title" style="color:var(--white)">ابدأي رحلتك مع إيكلاريا اليوم</h2>
+        <p id="cta-sub">انضمي إلى آلاف العميلات اللواتي وثقن بإيكلاريا لعنايتهن اليومية</p>
+        <div class="cta-buttons">
+          <button class="btn btn-gold btn-lg cta-btn1" onclick="navigateTo('products')">تسوقي الآن</button>
+          <button class="btn btn-outline btn-lg cta-btn2" onclick="navigateTo('booking')">احجزي استشارة مجانية</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-home -->
+
+<!-- ============================================
+     ABOUT PAGE
+     ============================================ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <div class="container">
+      <span class="badge" style="border-color:rgba(201,168,76,0.4);color:var(--gold);margin-bottom:20px">✦ قصتنا</span>
+      <h1 style="color:var(--white)">من نحن</h1>
+      <p style="color:rgba(255,255,255,0.6);margin-top:12px;max-width:560px;margin-left:auto;margin-right:auto">قصة شغف بالجمال والرفاهية الطبيعية</p>
+    </div>
+  </div>
+
+  <section class="about-story">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual">
+          <span style="position:relative;z-index:1;font-size:8rem">💎</span>
+        </div>
+        <div class="about-text">
+          <span class="badge" style="margin-bottom:16px">✦ قصتنا</span>
+          <h2>إيكلاريا — <span class="text-gold">الجمال النابع من الطبيعة</span></h2>
+          <p>وُلدت إيكلاريا من شغف حقيقي بالجمال الطبيعي والعناية المستدامة. انطلقنا من طنجة المغربية برؤية واضحة: تقديم منتجات تجميل فاخرة تجمع بين أجود المكونات الطبيعية وأحدث تقنيات العناية بالبشرة.</p>
+          <p>نؤمن بأن كل امرأة تستحق أفضل عناية. لذلك نختار كل مكون بعناية فائقة، ونختبر كل منتج بمعايير صارمة لضمان النتائج المثلى.</p>
+          <p class="highlight">مهمتنا: تمكين كل امرأة من اكتشاف جمالها الحقيقي من خلال منتجات آمنة وفعّالة ومستدامة.</p>
+          <div style="margin-top:28px">
+            <button class="btn btn-gold" onclick="navigateTo('products')">اكتشفي منتجاتنا</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid" id="about-stats"></div>
+
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="values-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge" style="border-color:rgba(201,168,76,0.4);color:var(--gold)">✦ ما يميزنا</span>
+        <h2 style="color:var(--white)">قيمنا الأساسية</h2>
+        <span class="gold-line"></span>
+      </div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🌿</div>
+          <h4>الطبيعية أولاً</h4>
+          <p style="color:var(--gray)">نلتزم باستخدام المكونات الطبيعية الخالية من المواد الكيميائية الضارة في جميع منتجاتنا.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔬</div>
+          <h4>الفعالية المثبتة</h4>
+          <p style="color:var(--gray)">كل منتج يخضع لاختبارات علمية صارمة لضمان نتائج ملموسة وحقيقية.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💚</div>
+          <h4>المسؤولية البيئية</h4>
+          <p style="color:var(--gray)">نحرص على الاستدامة في كل خطوة، من اختيار المكونات إلى التغليف الصديق للبيئة.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm cta-banner">
+    <div class="container">
+      <div class="cta-content">
+        <h2 style="color:var(--white)">جاهزة لتجربة إيكلاريا؟</h2>
+        <p>اكتشفي مجموعة منتجاتنا الفاخرة واحجزي استشارتك المجانية اليوم</p>
+        <div class="cta-buttons">
+          <button class="btn btn-gold btn-lg" onclick="navigateTo('products')">تسوقي الآن</button>
+          <button class="btn btn-outline btn-lg" onclick="navigateTo('booking')">استشارة مجانية</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-about -->
+
+<!-- ============================================
+     PRODUCTS PAGE
+     ============================================ -->
+<div class="page" id="page-products">
+  <div class="products-page-header">
+    <div class="container">
+      <span class="badge" style="border-color:rgba(201,168,76,0.4);color:var(--gold);margin-bottom:14px">✦ تشكيلتنا الكاملة</span>
+      <h1 style="color:var(--white)">منتجاتنا</h1>
+      <p>اكتشفي مجموعتنا الكاملة من منتجات العناية الفاخرة</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="products-layout">
+      <!-- Sidebar -->
+      <aside class="products-sidebar">
+        <div class="sidebar-section">
+          <h5>بحث</h5>
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="product-search" placeholder="ابحثي عن منتج..." oninput="filterSearch=this.value;renderProductsPage()" />
+          </div>
+        </div>
+        <div class="sidebar-section">
+          <h5>الفئات</h5>
+          <div class="filter-list" id="sidebar-categories"></div>
+        </div>
+        <div class="sidebar-section">
+          <h5>السعر</h5>
+          <div class="price-range">
+            <input type="range" class="range-slider" min="0" max="500" value="500" />
+            <div class="price-labels">
+              <span>0 درهم</span>
+              <span>500 درهم</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Products Main -->
+      <div>
+        <div class="products-toolbar">
+          <div class="result-count" id="results-count">عرض <strong>8</strong> منتج</div>
+          <select class="sort-select" onchange="filterSort=this.value;renderProductsPage()">
+            <option value="popular">الأكثر شعبية</option>
+            <option value="price_asc">السعر: الأقل أولاً</option>
+            <option value="price_desc">السعر: الأعلى أولاً</option>
+            <option value="newest">الأحدث</option>
+          </select>
+        </div>
+        <div class="products-grid" id="products-grid"></div>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-products -->
+
+<!-- ============================================
+     PRODUCT DETAIL PAGE
+     ============================================ -->
+<div class="page" id="page-product-detail">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="#" onclick="navigateTo('home')">الرئيسية</a>
+      <span class="sep">›</span>
+      <a href="#" onclick="navigateTo('products')">المنتجات</a>
+      <span class="sep">›</span>
+      <span>تفاصيل المنتج</span>
+    </div>
+  </div>
+  <div class="container" id="product-detail-container"></div>
+</div><!-- /page-product-detail -->
+
+<!-- ============================================
+     BOOKING PAGE
+     ============================================ -->
+<div class="page" id="page-booking">
+  <div class="booking-hero">
+    <div class="container">
+      <span class="badge" style="border-color:rgba(201,168,76,0.4);color:var(--gold);margin-bottom:16px">✦ خدمة مجانية</span>
+      <h1 style="color:var(--white)">احجزي استشارة</h1>
+      <p>استشارة مجانية مع خبراء الجمال لدينا</p>
+    </div>
+  </div>
+
+  <section class="booking-section">
+    <div class="container">
+      <div class="booking-grid">
+        <!-- Form -->
+        <div class="booking-form-wrap">
+          <h3>طلب استشارة مجانية</h3>
+          <form id="booking-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>الاسم الكامل *</label>
+                <input type="text" placeholder="سارة أحمد" required />
+              </div>
+              <div class="form-group">
+                <label>رقم الهاتف *</label>
+                <input type="tel" placeholder="0661xxxxxx" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>البريد الإلكتروني</label>
+              <input type="email" placeholder="your@email.com" />
+            </div>
+            <div class="form-group">
+              <label>نوع الاستشارة *</label>
+              <select id="consult-type" required>
+                <option>مشورة بشرة</option>
+                <option>عناية بالشعر</option>
+                <option>تجميل عام</option>
+                <option>روتين صباحي</option>
+                <option>روتين مسائي</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>التاريخ المفضل</label>
+                <input type="date" />
+              </div>
+              <div class="form-group">
+                <label>الوقت المفضل</label>
+                <select>
+                  <option>9:00 صباحاً</option>
+                  <option>11:00 صباحاً</option>
+                  <option>2:00 ظهراً</option>
+                  <option>4:00 عصراً</option>
+                  <option>6:00 مساءً</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>رسالتك (اختياري)</label>
+              <textarea placeholder="أخبرينا عن احتياجاتك وأسئلتك..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold btn-full btn-lg">✨ تأكيد الحجز</button>
+          </form>
+        </div>
+
+        <!-- Info Card -->
+        <div class="booking-info-card">
+          <h4 style="color:var(--white)">معلومات التواصل</h4>
+          <div class="info-item">
+            <div class="icon-wrap">📞</div>
+            <div class="info-text">
+              <h5>الهاتف</h5>
+              <p><a href="tel:0661600929" style="color:var(--gold)">0661600929</a></p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="icon-wrap">💬</div>
+            <div class="info-text">
+              <h5>واتساب</h5>
+              <p><a href="https://wa.me/212661600929" target="_blank" style="color:var(--gold)">0661600929</a></p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="icon-wrap">✉️</div>
+            <div class="info-text">
+              <h5>البريد الإلكتروني</h5>
+              <p><a href="mailto:ouazatnet@gmail.com" style="color:var(--gold)">ouazatnet@gmail.com</a></p>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="icon-wrap">📍</div>
+            <div class="info-text">
+              <h5>الموقع</h5>
+              <p style="color:var(--gray)">طنجة، المغرب</p>
+            </div>
+          </div>
+          <div style="margin-top:28px">
+            <a href="https://wa.me/212661600929?text=أريد حجز استشارة مجانية" target="_blank" class="btn btn-whatsapp btn-full"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="vertical-align:middle;margin-left:7px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> احجزي عبر واتساب</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-booking -->
+
+<!-- ============================================
+     FAQ PAGE
+     ============================================ -->
+<div class="page" id="page-faq">
+  <div class="faq-hero">
+    <div class="container">
+      <span class="badge" style="border-color:rgba(201,168,76,0.4);color:var(--gold);margin-bottom:16px">✦ المساعدة</span>
+      <h1 style="color:var(--white)">الأسئلة الشائعة</h1>
+      <p>كل ما تحتاجين معرفته عن منتجاتنا وخدماتنا</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="faq-section" id="faq-container"></div>
+
+    <div style="text-align:center;padding:0 0 60px">
+      <p style="color:var(--gray);margin-bottom:20px">لم تجدي إجابتك؟ تواصلي معنا مباشرة</p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="https://wa.me/212661600929" target="_blank" class="btn btn-whatsapp"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="vertical-align:middle;margin-left:6px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> واتساب</a>
+        <button class="btn btn-outline" onclick="navigateTo('contact')">✉️ اتصلي بنا</button>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-faq -->
+
+<!-- ============================================
+     CONTACT PAGE
+     ============================================ -->
+<div class="page" id="page-contact">
+  <div class="contact-hero">
+    <div class="container">
+      <span class="badge" style="border-color:rgba(201,168,76,0.4);color:var(--gold);margin-bottom:16px">✦ نحن هنا لك</span>
+      <h1 style="color:var(--white)">اتصلي بنا</h1>
+      <p>نحن هنا للإجابة على جميع استفساراتك</p>
+    </div>
+  </div>
+
+  <section class="contact-section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Form -->
+        <div>
+          <div class="booking-form-wrap">
+            <h3>أرسلي رسالتك</h3>
+            <form id="contact-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>الاسم *</label>
+                  <input type="text" placeholder="اسمك الكامل" required />
+                </div>
+                <div class="form-group">
+                  <label>الهاتف</label>
+                  <input type="tel" placeholder="0661xxxxxx" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>البريد الإلكتروني *</label>
+                <input type="email" placeholder="your@email.com" required />
+              </div>
+              <div class="form-group">
+                <label>الموضوع</label>
+                <select>
+                  <option>استفسار عن منتج</option>
+                  <option>متابعة طلب</option>
+                  <option>شكوى</option>
+                  <option>اقتراح</option>
+                  <option>أخرى</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>الرسالة *</label>
+                <textarea placeholder="اكتبي رسالتك هنا..." style="min-height:130px" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-gold btn-full btn-lg">إرسال الرسالة ✈️</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Contact Cards -->
+        <div class="contact-cards">
+          <div class="contact-card">
+            <div class="icon-wrap">📞</div>
+            <div>
+              <h4>اتصلي بنا</h4>
+              <p style="color:var(--gray);font-size:0.85rem;margin-bottom:6px">متاحون 9 ص - 9 م يومياً</p>
+              <a href="tel:0661600929">0661600929</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="icon-wrap">💬</div>
+            <div>
+              <h4>واتساب</h4>
+              <p style="color:var(--gray);font-size:0.85rem;margin-bottom:6px">رد فوري على رسائلك</p>
+              <a href="https://wa.me/212661600929" target="_blank">0661600929</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="icon-wrap">✉️</div>
+            <div>
+              <h4>البريد الإلكتروني</h4>
+              <p style="color:var(--gray);font-size:0.85rem;margin-bottom:6px">نرد خلال 24 ساعة</p>
+              <a href="mailto:ouazatnet@gmail.com">ouazatnet@gmail.com</a>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="icon-wrap">📍</div>
+            <div>
+              <h4>موقعنا</h4>
+              <p style="color:var(--gray);font-size:0.85rem">طنجة، المغرب</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-contact -->
+
+<!-- ============================================
+     CHECKOUT PAGE
+     ============================================ -->
+<div class="page" id="page-checkout">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="#" onclick="navigateTo('home')">الرئيسية</a>
+      <span class="sep">›</span>
+      <a href="#" onclick="openCart()">السلة</a>
+      <span class="sep">›</span>
+      <span>إتمام الشراء</span>
+    </div>
+  </div>
+
+  <section class="checkout-section">
+    <div class="container">
+      <h2 style="margin-bottom:32px">إتمام الشراء</h2>
+      <div class="checkout-grid">
+        <!-- Form -->
+        <div class="checkout-form">
+          <form id="checkout-form">
+            <h3>بيانات التوصيل</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label>الاسم الكامل *</label>
+                <input type="text" placeholder="سارة أحمد" required />
+              </div>
+              <div class="form-group">
+                <label>رقم الهاتف *</label>
+                <input type="tel" placeholder="0661xxxxxx" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>العنوان الكامل *</label>
+              <input type="text" placeholder="الشارع، الحي، المدينة" required />
+            </div>
+            <div class="form-group">
+              <label>المدينة *</label>
+              <input type="text" placeholder="طنجة" required />
+            </div>
+
+            <div class="section-divider">طريقة الدفع</div>
+            <div class="payment-methods">
+              <div class="payment-option">
+                <input type="radio" name="payment" id="pay-cod" value="cod" checked />
+                <label for="pay-cod">
+                  <span class="payment-icon">💵</span>
+                  الدفع عند الاستلام
+                </label>
+              </div>
+              <div class="payment-option">
+                <input type="radio" name="payment" id="pay-transfer" value="transfer" />
+                <label for="pay-transfer">
+                  <span class="payment-icon">🏦</span>
+                  تحويل بنكي
+                </label>
+              </div>
+              <div class="payment-option">
+                <input type="radio" name="payment" id="pay-whatsapp" value="whatsapp" />
+                <label for="pay-whatsapp">
+                  <span class="payment-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
+                  واتساب
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>ملاحظات إضافية (اختياري)</label>
+              <textarea placeholder="أي ملاحظات خاصة بطلبك..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-gold btn-full btn-lg" style="margin-top:8px">✅ تأكيد الطلب</button>
+            <a href="https://wa.me/212661600929" target="_blank" class="btn btn-whatsapp btn-full" style="margin-top:10px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="vertical-align:middle;margin-left:7px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> أو اطلبي عبر واتساب</a>
+          </form>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+          <div class="order-summary-header">
+            <h4>ملخص الطلب</h4>
+          </div>
+          <div class="order-items" id="order-items"></div>
+          <div class="order-totals">
+            <div class="order-row"><span>المجموع الفرعي</span><span id="checkout-subtotal">0 درهم</span></div>
+            <div class="order-row"><span>الشحن</span><span id="checkout-shipping">30 درهم</span></div>
+            <div class="order-row total"><span>الإجمالي</span><span id="checkout-total">0 درهم</span></div>
+          </div>
+          <div class="trust-badges">
+            <div class="trust-badge"><span class="icon">🔒</span> دفع آمن</div>
+            <div class="trust-badge"><span class="icon">✅</span> منتجات أصيلة</div>
+            <div class="trust-badge"><span class="icon">↩️</span> إرجاع 14 يوم</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-checkout -->
+
+<!-- ============================================
+     SUCCESS PAGE
+     ============================================ -->
+<div class="page" id="page-success">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:80vh;padding:40px 20px;text-align:center">
+    <div style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,rgba(201,168,76,0.2),rgba(201,168,76,0.05));border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:28px;animation:success-pop 0.5s ease-out">✅</div>
+    <h2 style="margin-bottom:12px">تم استلام طلبك بنجاح!</h2>
+    <div class="order-number" id="order-number" style="background:var(--off-white);border:1px solid var(--border);border-radius:8px;padding:12px 28px;font-weight:700;color:var(--gold);font-size:1.1rem;margin:16px 0">EC-000000</div>
+    <p style="color:var(--gray);max-width:420px;margin:0 auto 32px">سيتواصل معك فريقنا قريباً لتأكيد الطلب. شكراً لثقتك بإيكلاريا.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center">
+      <button class="btn btn-gold btn-lg" onclick="navigateTo('home')">← العودة للرئيسية</button>
+      <a href="https://wa.me/212661600929" target="_blank" class="btn btn-whatsapp btn-lg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="vertical-align:middle;margin-left:7px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> تواصلي معنا</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     CART DRAWER
+     ============================================ -->
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-header">
+    <h3>🛒 <span class="cart-label">سلة الشراء</span></h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items">
+    <div class="cart-empty">
+      <div class="empty-icon">🛒</div>
+      <p>سلتك فارغة</p>
+      <p class="text-gray">أضيفي منتجاتك المفضلة للسلة</p>
+    </div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-summary">
+      <div class="cart-row"><span>المجموع الفرعي</span><span class="price-val" id="cart-subtotal">0 درهم</span></div>
+      <div class="cart-row"><span>الشحن</span><span class="price-val" id="cart-shipping">30 درهم</span></div>
+      <div class="cart-row total"><span>الإجمالي</span><span class="price-val" id="cart-total">0 درهم</span></div>
+    </div>
+    <button class="btn btn-gold btn-full btn-lg" onclick="closeCart();navigateTo('checkout')">✅ إتمام الشراء</button>
+    <button class="btn btn-dark btn-full" style="margin-top:10px" onclick="closeCart()">← متابعة التسوق</button>
+  </div>
+</div>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer>
+  <div class="footer-top">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <div class="logo" style="margin-bottom:16px">
+            <div class="logo-icon">E</div>
+            <div class="logo-text">
+              <div class="brand">ECLARYA</div>
+              <div class="tagline">الجمال والرفاهية</div>
+            </div>
+          </div>
+          <p>إيكلاريا — وجهتك الأولى لمنتجات التجميل والعناية الفاخرة. نقدم أجود المكونات الطبيعية لتعكسي جمالك الحقيقي.</p>
+          <div class="footer-social">
+            <a href="#" class="social-btn" title="Instagram">📷</a>
+            <a href="#" class="social-btn" title="Facebook">👥</a>
+            <a href="https://wa.me/212661600929" class="social-btn" title="WhatsApp" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+            <a href="mailto:ouazatnet@gmail.com" class="social-btn" title="Email">✉️</a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h5 data-footer-label="footer_links">روابط سريعة</h5>
+          <ul>
+            <li><a href="#" onclick="navigateTo('home')">الرئيسية</a></li>
+            <li><a href="#" onclick="navigateTo('about')">من نحن</a></li>
+            <li><a href="#" onclick="navigateTo('products')">المنتجات</a></li>
+            <li><a href="#" onclick="navigateTo('booking')">احجزي استشارة</a></li>
+            <li><a href="#" onclick="navigateTo('faq')">الأسئلة الشائعة</a></li>
+          </ul>
+        </div>
+
+        <!-- Categories -->
+        <div class="footer-col">
+          <h5 data-footer-label="footer_cats">الفئات</h5>
+          <ul>
+            <li><a href="#" onclick="navigateTo('products');setCatFilter('skincare')">عناية بالبشرة</a></li>
+            <li><a href="#" onclick="navigateTo('products');setCatFilter('hair')">عناية بالشعر</a></li>
+            <li><a href="#" onclick="navigateTo('products');setCatFilter('mask')">أقنعة</a></li>
+            <li><a href="#" onclick="navigateTo('products');setCatFilter('sun')">واقي الشمس</a></li>
+            <li><a href="#" onclick="navigateTo('products');setCatFilter('set')">مجموعات</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-col">
+          <h5 data-footer-label="footer_contact">تواصلي معنا</h5>
+          <ul class="footer-contact">
+            <li><span class="icon">📞</span><a href="tel:0661600929">0661600929</a></li>
+            <li><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="#25D366" style="vertical-align:middle"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span><a href="https://wa.me/212661600929" target="_blank">واتساب: 0661600929</a></li>
+            <li><span class="icon">✉️</span><a href="mailto:ouazatnet@gmail.com">ouazatnet@gmail.com</a></li>
+            <li><span class="icon">📍</span><span>طنجة، المغرب</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="footer-bottom">
+      <p>© 2024 <span>ECLARYA إيكلاريا</span>. جميع الحقوق محفوظة.</p>
+      <p>صُنع بـ ❤️ في المغرب</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     FLOATING ELEMENTS
+     ============================================ -->
+
+<!-- WhatsApp Float -->
+<a href="https://wa.me/212661600929?text=مرحباً، أريد الاستفسار عن منتجات إيكلاريا" target="_blank" class="whatsapp-float" title="تواصلي عبر واتساب"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<!-- Notification Toast -->
+<div class="notification" id="notification">
+  <span class="notif-icon">✅</span>
+  <span class="notif-msg"></span>
+</div>
+
+<!-- Live Order Popup -->
+<div class="live-order" id="live-order-popup">
+  <div class="live-order-icon">✨</div>
+  <div class="live-order-text">
+    <p class="live-order-name">سارة من الدار البيضاء</p>
+    <span class="live-order-product">سيروم فيتامين سي</span><br>
+    <span class="live-order-time" style="font-size:0.72rem;color:var(--gray)">منذ 2 دقيقة</span>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>
