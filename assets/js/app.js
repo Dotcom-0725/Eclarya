@@ -1054,13 +1054,14 @@ function renderCheckout() {
   set('checkout-subtotal', subtotal + ' ' + t('drh'));
   set('checkout-total', subtotal + ' ' + t('drh'));
 
-  // Product details below form
+  // Product details below form — tabbed layout
   const detailBox = document.getElementById('checkout-product-detail');
   if (!detailBox) return;
   const isAr = state.lang === 'ar';
-  const desc = isAr ? (p.fullDescAr || p.descAr) : (p.fullDescFr || p.descFr);
+  const fullDesc = isAr ? (p.fullDescAr || p.descAr) : (p.fullDescFr || p.descFr);
   const benefits = isAr ? p.benefitsAr : p.benefitsFr;
-  const ingredients = p.fullIngredientsAr || p.ingredients || [];
+  const info = p.productInfoAr;
+  const ingredients = p.fullIngredientsAr || [];
   const steps = isAr ? p.stepsAr : p.stepsFr;
   const tip = isAr ? p.tipAr : p.tipFr;
 
@@ -1070,23 +1071,24 @@ function renderCheckout() {
         ${p.img ? `<img src="${p.img}" alt="${name}" />` : `<span style="font-size:5rem">${p.emoji}</span>`}
       </div>
       <h3 class="checkout-detail-title">${name}</h3>
-      <p class="checkout-detail-desc">${desc ? desc.replace(/\n\n/g,'<br><br>') : ''}</p>
-      ${benefits ? `
-        <div class="checkout-detail-block">
-          <h4>🌿 ${isAr ? 'فوائد المنتج' : 'Bénéfices'}</h4>
-          <ul>${benefits.map(b => `<li>✅ ${b}</li>`).join('')}</ul>
-        </div>` : ''}
-      ${ingredients.length ? `
-        <div class="checkout-detail-block">
-          <h4>🧪 ${isAr ? 'المكونات' : 'Ingrédients'}</h4>
-          <div class="checkout-ingredients">${ingredients.map(i => `<span>${i}</span>`).join('')}</div>
-        </div>` : ''}
-      ${steps ? `
-        <div class="checkout-detail-block">
-          <h4>📖 ${isAr ? 'طريقة الاستعمال' : 'Mode d\'emploi'}</h4>
-          <ol>${steps.map(s => `<li>${s}</li>`).join('')}</ol>
-          ${tip ? `<div class="how-tip" style="margin-top:12px">💡 <strong>${isAr ? 'نصيحة:' : 'Conseil :'}</strong> ${tip}</div>` : ''}
-        </div>` : ''}
+      <div class="product-tabs" style="margin-top:20px">
+        <div class="tab-nav">
+          <button class="tab-btn active" onclick="openTab('co-desc',this)">${isAr ? 'الوصف' : 'Description'}</button>
+          <button class="tab-btn" onclick="openTab('co-ing',this)">${isAr ? 'المكونات' : 'Ingrédients'}</button>
+          <button class="tab-btn" onclick="openTab('co-how',this)">${isAr ? 'طريقة الاستعمال' : 'Mode d\'emploi'}</button>
+        </div>
+        <div class="tab-content active" id="tab-co-desc">
+          <p style="line-height:1.9;margin-bottom:20px">${fullDesc ? fullDesc.replace(/\n\n/g,'</p><p style="line-height:1.9;margin-bottom:20px">') : ''}</p>
+          ${benefits ? `<div class="detail-benefits"><h4 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--gold)">🌿 ${isAr ? 'فوائد المنتج' : 'Bénéfices'}</h4><ul class="benefits-list">${benefits.map(b => `<li>✅ ${b}</li>`).join('')}</ul></div>` : ''}
+          ${info ? `<div class="detail-info-box" style="margin-top:20px"><h4 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--gold)">📦 ${isAr ? 'معلومات المنتج' : 'Infos produit'}</h4><table class="info-table"><tr><td>${isAr?'النوع':'Type'}</td><td>${info.type||''}</td></tr><tr><td>${isAr?'السعة':'Volume'}</td><td>${info.size||''}</td></tr></table></div>` : ''}
+        </div>
+        <div class="tab-content" id="tab-co-ing">
+          ${ingredients.length ? `<ul class="full-ingredients-list">${ingredients.map(i => `<li>${i}</li>`).join('')}</ul>` : `<p>${isAr ? 'غير متوفر' : 'Non disponible'}</p>`}
+        </div>
+        <div class="tab-content" id="tab-co-how">
+          ${steps ? `<ol class="how-steps">${steps.map(s => `<li>${s}</li>`).join('')}</ol>${tip ? `<div class="how-tip">💡 <strong>${isAr ? 'نصيحة:' : 'Conseil :'}</strong> ${tip}</div>` : ''}` : `<p>${isAr ? 'غير متوفر' : 'Non disponible'}</p>`}
+        </div>
+      </div>
     </div>`;
 }
 
