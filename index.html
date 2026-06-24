@@ -54,7 +54,11 @@
 
       <!-- Actions -->
       <div class="nav-actions">
-        <button class="hamburger" id="hamburger-btn">
+        <div class="lang-switch lang-switch-nav">
+          <button class="lang-btn active" data-lang="ar" onclick="setLang('ar')">العربية</button>
+          <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">Français</button>
+        </div>
+        <button class="hamburger" id="hamburger-btn" onclick="(function(){var b=document.getElementById('hamburger-btn'),m=document.getElementById('mobile-menu');b.classList.toggle('open');m.classList.toggle('open');})()">
           <span></span><span></span><span></span>
         </button>
       </div>

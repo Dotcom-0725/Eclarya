@@ -1221,10 +1221,15 @@ body.lang-ar .whatsapp-float { right: auto; left: 24px; }
   .product-gallery { position: static !important; }
 }
 
+/* Lang switch in navbar (mobile only) */
+.lang-switch-nav { display: none; }
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
   .header-top .contact-links { display: none; }
+  .header-top .lang-switch { display: none; }
+  .lang-switch-nav { display: flex; gap: 6px; align-items: center; }
+  .lang-switch-nav .lang-btn { font-size: 0.72rem; padding: 4px 10px; }
   .slide-content { padding: 0 24px; }
   .slide-visual { display: none; }
   .trust-items { gap: 20px; }
