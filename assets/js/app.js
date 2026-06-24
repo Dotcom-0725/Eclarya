@@ -7,10 +7,10 @@
 // ---- State ----
 const state = {
   lang: localStorage.getItem('eclarya-lang') || 'ar',
-  cart: JSON.parse(localStorage.getItem('eclarya-cart') || '[]'),
   currentPage: 'home',
   wishlist: JSON.parse(localStorage.getItem('eclarya-wishlist') || '[]'),
   currentProduct: null,
+  orderProduct: null,
 };
 
 // ---- Translations ----
@@ -100,7 +100,7 @@ const T = {
     order_success: 'تم استلام طلبك بنجاح!',
     order_success_msg: 'سيتواصل معك فريقنا قريباً لتأكيد الطلب. شكراً لثقتك بإكلاريا.',
     back_home: 'العودة للرئيسية',
-    trust1: 'شحن مجاني فوق 300 درهم',
+    trust1: 'شحن مجاني لجميع الطلبات',
     trust2: 'منتجات أصيلة 100%',
     trust3: 'إرجاع مجاني 14 يوم',
     trust4: 'دفع آمن ومضمون',
@@ -226,7 +226,7 @@ const T = {
     order_success: 'Votre commande a bien été reçue !',
     order_success_msg: 'Notre équipe vous contactera bientôt pour confirmer. Merci de votre confiance en ECLARYA.',
     back_home: 'Retour à l\'accueil',
-    trust1: 'Livraison gratuite +300 DH',
+    trust1: 'Livraison gratuite partout',
     trust2: 'Produits 100% authentiques',
     trust3: 'Retour gratuit 14 jours',
     trust4: 'Paiement sécurisé',
@@ -287,48 +287,210 @@ function uimg(id, w=800, h=800) {
 const PRODUCTS = [
   {
     id: 1,
-    nameAr: 'سيروم كونتور العيون', nameFr: 'Sérum Contour des Yeux',
+    nameAr: 'كريم إيكلاريا AHA لتفتيح البشرة', nameFr: 'Crème Éclarya AHA Éclaircissante',
     cat: 'skincare', catAr: 'عناية بالبشرة', catFr: 'Soins de peau',
-    price: 199, oldPrice: 250,
-    img: 'assets/images/eclarya-serum.jpg',
-    imgFallback: uimg('1556228720-195a672e8a03'),
-    emoji: '💧', rating: 4.9, reviews: 147, badge: 'popular',
-    descAr: 'سيروم إيكلاريا المتخصص لمنطقة حول العيون بمكونات طبيعية فعّالة. يقلل من الهالات السوداء والانتفاخات ويرطب البشرة الرقيقة حول العيون بعمق.',
-    descFr: 'Sérum Éclarya spécialement formulé pour le contour des yeux avec des ingrédients naturels actifs. Réduit les cernes, les poches et hydrate en profondeur.',
-    ingredients: ['Hyaluronic Acid 2%', 'Peptides', 'Caffeine', 'Aloe Vera Bio', 'Vitamin K'],
-    how_to_useAr: 'ضعي كمية صغيرة على إصبعك وضعيها برفق حول العين صباحاً ومساءً على بشرة نظيفة.',
-    how_to_useFr: 'Appliquez une petite quantité avec le bout du doigt délicatement autour de l\'œil matin et soir sur peau propre.',
-    bg: 'linear-gradient(135deg,#e8f5e9,#c8e6c9)', new: true
-  },
-  {
-    id: 2,
-    nameAr: 'كريم مضيء AHA', nameFr: 'Crème Éclaircissante AHA',
-    cat: 'skincare', catAr: 'عناية بالبشرة', catFr: 'Soins de peau',
-    price: 179, oldPrice: 220,
+    price: 149, oldPrice: null,
     img: 'assets/images/eclarya-creme.jpg',
-    imgFallback: uimg('1570194065650-d99fb4b8ccb0'),
     emoji: '🌿', rating: 4.9, reviews: 203, badge: 'popular',
-    descAr: 'كريم إيكلاريا المضيء بأحماض AHA الطبيعية — يضيء البشرة ويوحد لونها ويقشر بلطف لبشرة مشرقة وصحية. 50ml.',
-    descFr: 'La crème éclaircissante Éclarya aux AHA naturels — éclaire le teint, unifie la carnation et exfolie en douceur pour une peau lumineuse. 50ml.',
+    descAr: 'كريم إيكلاريا بأحماض AHA الطبيعية — يفتح البشرة ويوحد لونها ويقشر بلطف فائق. يرفع التصبغات ويمنح بشرة مضيئة وصحية. 50ml.',
+    descFr: 'Crème Éclarya aux AHA naturels — éclaire, unifie le teint et exfolie en douceur. Réduit les taches et donne un éclat naturel. 50ml.',
     ingredients: ['AHA Complex (Glycolic + Lactic)', 'Niacinamide 5%', 'Vitamin C', 'Centella Asiatica', 'Shea Butter'],
     how_to_useAr: 'ضعي طبقة رقيقة على الوجه المنظف كل مساء. ابدئي بمرة واحدة أسبوعياً ثم زيدي التدريجياً.',
     how_to_useFr: 'Appliquez une fine couche sur le visage nettoyé chaque soir. Commencez par une fois par semaine puis augmentez progressivement.',
-    bg: 'linear-gradient(135deg,#f1f8e9,#dcedc8)', new: false
+    bg: 'linear-gradient(135deg,#f1f8e9,#dcedc8)', new: false, outOfStock: false,
+    fullDescAr: `كريم Éclarya AHA هو كريم متطور للعناية بالبشرة صُمم خصيصًا للمساعدة على تفتيح البشرة وتوحيد لونها ومنحها إشراقة طبيعية. يحتوي على مزيج من أحماض الفواكه (AHA) ومستخلصات نباتية مغذية تعمل على إزالة الخلايا الميتة بلطف، مما يساعد على تحسين مظهر البقع الداكنة والتصبغات وتوحيد لون البشرة.\n\nبفضل تركيبته الغنية بالمرطبات والمكونات المغذية، يساعد الكريم على الحفاظ على نعومة البشرة وترطيبها، ليمنحك بشرة أكثر نضارة وصفاءً وإشراقًا مع الاستخدام المنتظم.`,
+    fullDescFr: `La crème Éclarya AHA est une crème de soin avancée conçue pour aider à éclaircir le teint, l'unifier et lui donner un éclat naturel. Elle contient un mélange d'acides de fruits (AHA) et d'extraits végétaux nourrissants qui éliminent en douceur les cellules mortes, aidant à réduire les taches sombres et à unifier le teint.\n\nGrâce à sa formule riche en hydratants et en actifs nourrissants, la crème aide à maintenir la douceur et l'hydratation de la peau.`,
+    benefitsAr: [
+      'يساعد على تفتيح البشرة وإضفاء إشراقة طبيعية',
+      'يساهم في توحيد لون البشرة وتقليل مظهر التصبغات',
+      'يقشر البشرة بلطف لإزالة الخلايا الميتة',
+      'يمنح البشرة ترطيبًا عميقًا وملمسًا أكثر نعومة',
+      'يساعد على تحسين مظهر البشرة الباهتة والمتعبة',
+      'مناسب للاستخدام اليومي ضمن روتين العناية بالبشرة',
+    ],
+    benefitsFr: [
+      'Aide à éclaircir la peau et lui donner un éclat naturel',
+      'Contribue à unifier le teint et réduire les taches',
+      'Exfolie la peau en douceur pour éliminer les cellules mortes',
+      'Hydrate en profondeur pour une peau plus douce',
+      'Améliore l\'apparence d\'un teint terne et fatigué',
+      'Convient à une utilisation quotidienne',
+    ],
+    fullIngredientsAr: [
+      'Aqua (ماء)',
+      'Mentha Piperita Leaf Water (ماء النعناع الفلفلي)',
+      'Chamaemelum Nobile Flower Water (ماء البابونج الروماني)',
+      'Glycerin (الجلسرين المرطب)',
+      'Prunus Amygdalus Dulcis Oil (زيت اللوز الحلو)',
+      'Vitis Vinifera Seed Oil (زيت بذور العنب)',
+      'Niacinamide (النياسيناميد)',
+      'Glycolic Acid (حمض الجليكوليك)',
+      'Tartaric Acid (حمض الطرطريك)',
+      'Malic Acid (حمض الماليك)',
+      'Carica Papaya Fruit Extract (مستخلص البابايا)',
+      'Psidium Guajava Fruit Extract (مستخلص الجوافة)',
+      'Saxifraga Sarmentosa Extract',
+      'Tocopherol (فيتامين E)',
+      'Urea (اليوريا)',
+      'Sodium Lactate (لاكتات الصوديوم)',
+    ],
+    stepsAr: [
+      'اغسل الوجه والرقبة جيدًا وجففهما بلطف.',
+      'ضع كمية مناسبة من الكريم على الوجه والرقبة.',
+      'دلك بحركات دائرية خفيفة حتى يتم امتصاصه بالكامل.',
+      'يُستخدم يوميًا للحصول على أفضل النتائج.',
+    ],
+    stepsFr: [
+      'Nettoyez bien le visage et le cou, puis séchez délicatement.',
+      'Appliquez une quantité appropriée de crème sur le visage et le cou.',
+      'Massez en mouvements circulaires doux jusqu\'à absorption complète.',
+      'Utilisez quotidiennement pour de meilleurs résultats.',
+    ],
+    tipAr: 'يُفضل استخدام واقي شمس خلال النهار عند استعمال المنتجات التي تحتوي على أحماض الفواكه (AHA) للمساعدة في حماية البشرة.',
+    tipFr: 'Il est conseillé d\'utiliser un écran solaire pendant la journée lors de l\'utilisation de produits contenant des AHA pour aider à protéger la peau.',
+    productInfoAr: { type: 'كريم عناية وتفتيح للبشرة', use: 'الوجه والرقبة', color: 'أبيض', texture: 'كريم', size: '50 مل', shelf: '24 شهرًا قبل الفتح / 6 أشهر بعد الفتح' },
+    storageAr: [
+      'يُحفظ بعيدًا عن الحرارة والرطوبة.',
+      'للاستعمال الخارجي فقط.',
+      'يُحفظ بعيدًا عن متناول الأطفال.',
+      'لا يُبتلع.',
+    ],
+  },
+  {
+    id: 2,
+    nameAr: 'سيروم إيكلاريا لمحيط العين بالكافيين', nameFr: 'Sérum Éclarya Contour des Yeux au Caféine',
+    cat: 'skincare', catAr: 'عناية بالبشرة', catFr: 'Soins de peau',
+    price: 189, oldPrice: null,
+    img: 'assets/images/eclarya-serum.jpg',
+    emoji: '💧', rating: 4.9, reviews: 147, badge: 'popular',
+    descAr: 'سيروم إيكلاريا المتخصص لمحيط العين بالكافيين وحمض الهيالورونيك. يقلل الهالات السوداء والانتفاخات ويرطب البشرة الرقيقة بعمق.',
+    descFr: 'Sérum Éclarya pour le contour des yeux à la Caféine et à l\'Acide Hyaluronique. Réduit les cernes, les poches et hydrate en profondeur.',
+    ingredients: ['Caffeine 2%', 'Hyaluronic Acid', 'Peptides', 'Aloe Vera Bio', 'Vitamin K'],
+    how_to_useAr: 'ضعي كمية صغيرة برفق حول العين صباحاً ومساءً على بشرة نظيفة.',
+    how_to_useFr: 'Appliquez délicatement autour de l\'œil matin et soir sur peau propre.',
+    bg: 'linear-gradient(135deg,#e8f5e9,#c8e6c9)', new: false, outOfStock: false,
+    fullDescAr: `سيروم Éclarya لمحيط العين هو تركيبة خفيفة وسريعة الامتصاص صُممت خصيصًا للعناية بالمنطقة الحساسة حول العينين. يجمع بين قوة الكافيين وحمض الهيالورونيك ومجموعة من المستخلصات النباتية المهدئة والمرطبة للمساعدة على تقليل مظهر الانتفاخات والهالات السوداء والخطوط الدقيقة.\n\nيمنح هذا السيروم ترطيبًا عميقًا وانتعاشًا فوريًا لمحيط العين، مما يساعد على استعادة إشراقة ونضارة النظرة للحصول على مظهر أكثر حيوية وشبابًا.`,
+    fullDescFr: `Le sérum Éclarya pour le contour des yeux est une formule légère et à absorption rapide, spécialement conçue pour prendre soin de la zone sensible autour des yeux. Il combine la puissance de la caféine et de l'acide hyaluronique avec des extraits végétaux apaisants pour aider à réduire les poches, les cernes et les ridules.\n\nCe sérum offre une hydratation intense et une sensation de fraîcheur immédiate autour des yeux.`,
+    benefitsAr: [
+      'يساعد على تقليل مظهر الهالات السوداء',
+      'يخفف من انتفاخات وأكياس تحت العين',
+      'يرطب البشرة بعمق ويمنع الجفاف',
+      'يساعد على تنعيم الخطوط الدقيقة وعلامات التعب',
+      'يمنح محيط العين مظهرًا أكثر إشراقًا وحيوية',
+      'سريع الامتصاص وغير دهني — مناسب لجميع أنواع البشرة',
+    ],
+    benefitsFr: [
+      'Aide à réduire l\'apparence des cernes',
+      'Atténue les poches et gonflements sous les yeux',
+      'Hydrate intensément et prévient la déshydratation',
+      'Lisse les ridules et signes de fatigue',
+      'Illumine et revitalise le regard',
+      'Absorption rapide, texture non grasse — tous types de peau',
+    ],
+    fullIngredientsAr: [
+      'Hyaluronic Acid — حمض الهيالورونيك: يجذب الرطوبة للبشرة ويمنحها ترطيبًا مكثفًا',
+      'Caffeine — الكافيين: ينشط محيط العين ويقلل الانتفاخات والهالات',
+      'Rosa Damascena Flower Water — ماء الورد الدمشقي: يهدئ البشرة وينعشها',
+      'Chamomilla Recutita Flower Water — ماء البابونج: مهدئ للبشرة الحساسة',
+      'Aloe Barbadensis Leaf Juice — جل الألوفيرا: يرطب البشرة ويهدئها',
+      'Niacinamide — النياسيناميد: يحسن لون البشرة ويمنحها إشراقة',
+      'Panthenol — البانثينول: يرطب البشرة ويعزز نعومتها',
+      'Cucumber Extract — مستخلص الخيار: يهدئ ويمنح إحساسًا بالانتعاش',
+      'Camellia Sinensis Extract — مستخلص الشاي الأخضر: غني بمضادات الأكسدة',
+      'Algae Extract — مستخلص الطحالب البحرية: يرطب ويحافظ على الصحة',
+    ],
+    stepsAr: [
+      'نظف وجفف منطقة محيط العين جيدًا.',
+      'ضع كمية صغيرة من السيروم حول العين.',
+      'ربّت بلطف بأطراف الأصابع حتى يتم امتصاص المنتج بالكامل.',
+      'يستخدم صباحًا ومساءً ضمن روتين العناية اليومي.',
+    ],
+    stepsFr: [
+      'Nettoyez et séchez délicatement la zone autour des yeux.',
+      'Appliquez une petite quantité de sérum autour des yeux.',
+      'Tapotez doucement du bout des doigts jusqu\'à absorption complète.',
+      'Utilisez matin et soir dans votre routine quotidienne.',
+    ],
+    tipAr: 'للحصول على أفضل النتائج، يُنصح بالاستمرار على الاستخدام اليومي المنتظم.',
+    tipFr: 'Pour de meilleurs résultats, il est conseillé de maintenir une utilisation quotidienne régulière.',
+    productInfoAr: { type: 'سيروم لمحيط العين', use: 'منطقة حول العين', color: 'شفاف', texture: 'سائل لزج خفيف', size: '30 مل', shelf: '24 شهرًا قبل الفتح / 6 أشهر بعد الفتح' },
+    storageAr: [
+      'للاستعمال الخارجي فقط.',
+      'تجنب ملامسة المنتج للعين مباشرة.',
+      'يُحفظ بعيدًا عن متناول الأطفال.',
+      'يُحفظ في مكان جاف بعيدًا عن الحرارة وأشعة الشمس المباشرة.',
+      'يُغلق بإحكام بعد كل استخدام.',
+    ],
   },
   {
     id: 3,
-    nameAr: 'مجموعة إيكلاريا الكاملة', nameFr: 'Set Éclarya Complet',
+    nameAr: 'الباقة الكاملة — الكريم + السيروم', nameFr: 'Pack Complet — Crème + Sérum',
     cat: 'set', catAr: 'مجموعات', catFr: 'Sets',
-    price: 349, oldPrice: 470,
-    img: 'assets/images/eclarya-set.jpg',
-    imgFallback: uimg('1571781926291-c477ebfd024b'),
+    price: 250, oldPrice: 338,
+    img: 'assets/images/eclarya-products.jpg',
     emoji: '✨', rating: 5.0, reviews: 89, badge: 'sale',
-    descAr: 'المجموعة الكاملة من إيكلاريا تضم: سيروم كونتور العيون + كريم مضيء AHA. روتين عناية متكامل لبشرة مضيئة وشابة.',
-    descFr: 'Le set complet Éclarya comprend : Sérum Contour des Yeux + Crème Éclaircissante AHA. Routine complète pour une peau lumineuse et jeune.',
-    ingredients: ['AHA Complex', 'Hyaluronic Acid', 'Peptides', 'Niacinamide', 'Vitamin C'],
-    how_to_useAr: 'صباحاً: سيروم العيون + واقي الشمس. مساءً: تنظيف ثم الكريم المضيء ثم سيروم العيون.',
-    how_to_useFr: 'Matin : sérum yeux + protection solaire. Soir : nettoyage puis crème éclaircissante puis sérum yeux.',
-    bg: 'linear-gradient(135deg,#e8f5e9,#a5d6a7)', new: false
+    descAr: 'الباقة الكاملة من إيكلاريا: كريم AHA لتفتيح البشرة + سيروم محيط العين بالكافيين. روتين عناية متكامل بسعر استثنائي.',
+    descFr: 'Pack complet Éclarya : Crème AHA Éclaircissante + Sérum Contour des Yeux. Routine complète à prix exceptionnel.',
+    ingredients: ['AHA Complex', 'Caffeine', 'Hyaluronic Acid', 'Peptides', 'Niacinamide', 'Vitamin C'],
+    how_to_useAr: 'صباحاً: سيروم العيون. مساءً: تنظيف ثم الكريم المضيء ثم سيروم العيون.',
+    how_to_useFr: 'Matin : sérum yeux. Soir : nettoyage puis crème éclaircissante puis sérum yeux.',
+    bg: 'linear-gradient(135deg,#e8f5e9,#a5d6a7)', new: false, outOfStock: false,
+    fullDescAr: `الباقة الكاملة من Éclarya تضم منتجَين مكمّلَين لبعضهما:\n\n🌿 كريم Éclarya AHA: يفتح البشرة ويوحد لونها بأحماض الفواكه الطبيعية، يقشر بلطف ويمنح إشراقة وترطيبًا عميقًا. 50 مل.\n\n💧 سيروم Éclarya لمحيط العين: تركيبة خفيفة بالكافيين وحمض الهيالورونيك تقلل الهالات والانتفاخات وتمنح محيط العين نضارة فورية. 30 مل.\n\nاحصلي على روتين عناية متكامل بسعر استثنائي ووفري 88 درهم مقارنةً بشراء المنتجَين منفردَين.`,
+    fullDescFr: `Le Pack Complet Éclarya réunit deux produits complémentaires :\n\n🌿 Crème Éclarya AHA : éclaire et unifie le teint grâce aux AHA naturels, exfolie en douceur et hydrate en profondeur. 50 ml.\n\n💧 Sérum Éclarya Contour des Yeux : formule légère à la Caféine et à l'Acide Hyaluronique pour réduire les cernes, les poches et raviver le regard. 30 ml.\n\nProfitez d'une routine beauté complète à un tarif exceptionnel et économisez 88 DH.`,
+    benefitsAr: [
+      'يوحد لون البشرة ويقلل التصبغات والبقع الداكنة (الكريم)',
+      'يقلل مظهر الهالات السوداء والانتفاخات حول العين (السيروم)',
+      'يرطب البشرة والمنطقة حول العين ترطيبًا عميقًا',
+      'يقشر بلطف ويمنح إشراقة طبيعية يومية',
+      'روتين عناية متكامل صباحًا ومساءً',
+      'توفير 88 درهم مقارنةً بشراء المنتجَين منفردَين',
+    ],
+    benefitsFr: [
+      'Unifie le teint et réduit les taches (Crème)',
+      'Réduit les cernes et les poches (Sérum)',
+      'Hydrate intensément la peau et le contour des yeux',
+      'Exfolie en douceur pour un éclat naturel',
+      'Routine complète matin et soir',
+      'Économie de 88 DH par rapport à l\'achat séparé',
+    ],
+    fullIngredientsAr: [
+      '— كريم AHA —',
+      'AHA Complex (Glycolic + Lactic Acid) — أحماض الفواكه',
+      'Niacinamide 5% — النياسيناميد',
+      'Vitamin C — فيتامين سي',
+      'Centella Asiatica — مستخلص الستيلا الآسيوية',
+      'Shea Butter — زبدة الشيا',
+      '— سيروم محيط العين —',
+      'Caffeine — الكافيين',
+      'Hyaluronic Acid — حمض الهيالورونيك',
+      'Niacinamide — النياسيناميد',
+      'Rosa Damascena Flower Water — ماء الورد الدمشقي',
+      'Aloe Barbadensis Leaf Juice — جل الألوفيرا',
+      'Panthenol — البانثينول',
+      'Cucumber Extract — مستخلص الخيار',
+      'Camellia Sinensis Extract — مستخلص الشاي الأخضر',
+    ],
+    stepsAr: [
+      'صباحًا: ضعي سيروم محيط العين بلطف حول العينين بأطراف الأصابع.',
+      'مساءً: نظفي الوجه جيدًا، ثم ضعي كريم AHA بحركات دائرية على الوجه والرقبة.',
+      'أتمي الروتين بسيروم محيط العين مرة أخرى مساءً.',
+      'استخدمي يوميًا للحصول على أفضل النتائج.',
+    ],
+    stepsFr: [
+      'Matin : appliquez le sérum yeux délicatement autour des yeux du bout des doigts.',
+      'Soir : nettoyez le visage, puis appliquez la crème AHA en mouvements circulaires.',
+      'Terminez la routine en appliquant à nouveau le sérum yeux le soir.',
+      'Utilisez quotidiennement pour de meilleurs résultats.',
+    ],
+    tipAr: 'يُنصح باستخدام واقي شمس خلال النهار عند استعمال كريم AHA للحفاظ على نتائج التفتيح وحماية البشرة.',
+    tipFr: 'Il est conseillé d\'utiliser une protection solaire le jour lors de l\'utilisation de la crème AHA.',
+    productInfoAr: { type: 'باقة عناية متكاملة', use: 'الوجه والرقبة ومحيط العين', color: 'متعدد', texture: 'كريم + سيروم', size: '50 مل + 30 مل', shelf: '24 شهرًا قبل الفتح / 6 أشهر بعد الفتح' },
+    storageAr: [
+      'للاستعمال الخارجي فقط.',
+      'يُحفظ بعيدًا عن الحرارة والرطوبة.',
+      'يُحفظ بعيدًا عن متناول الأطفال.',
+      'تجنب ملامسة السيروم للعين مباشرة.',
+    ],
   },
   {
     id: 4,
@@ -336,69 +498,64 @@ const PRODUCTS = [
     cat: 'skincare', catAr: 'عناية بالبشرة', catFr: 'Soins de peau',
     price: 189, oldPrice: null,
     img: uimg('1620916566398-39f1143ab7be'),
-    emoji: '✨', rating: 4.8, reviews: 128, badge: 'new',
-    descAr: 'سيروم مركز بفيتامين سي النقي 20% لبشرة أكثر إشراقاً وشباباً. يقلل من البقع الداكنة ويوحد لون البشرة.',
-    descFr: 'Sérum concentré en Vitamine C pure 20% pour une peau plus lumineuse. Réduit les taches sombres.',
-    ingredients: ['Vitamine C 20%', 'Niacinamide', 'Hyaluronic Acid', 'Rose Hip Oil'],
-    how_to_useAr: 'ضعي 3-4 قطرات على بشرة نظيفة كل صباح قبل الترطيب.',
-    how_to_useFr: 'Appliquez 3-4 gouttes sur une peau propre chaque matin avant l\'hydratant.',
-    bg: 'linear-gradient(135deg,#fff3e0,#ffe0b2)', new: true
+    emoji: '✨', rating: 4.8, reviews: 128, badge: null,
+    descAr: 'سيروم مركز بفيتامين سي النقي 20% لبشرة أكثر إشراقاً.',
+    descFr: 'Sérum concentré en Vitamine C pure 20% pour une peau plus lumineuse.',
+    ingredients: ['Vitamine C 20%', 'Niacinamide', 'Hyaluronic Acid'],
+    how_to_useAr: '', how_to_useFr: '',
+    bg: 'linear-gradient(135deg,#fff3e0,#ffe0b2)', new: false, outOfStock: true
   },
   {
     id: 5,
-    nameAr: 'واقي الشمس Natural SPF50+', nameFr: 'Protection Solaire Natural SPF50+',
+    nameAr: 'واقي الشمس Natural SPF50+', nameFr: 'Protection Solaire SPF50+',
     cat: 'sun', catAr: 'واقي الشمس', catFr: 'Solaire',
-    price: 145, oldPrice: 180,
+    price: 145, oldPrice: null,
     img: uimg('1508739773434-c26b3d09e071'),
     emoji: '☀️', rating: 4.8, reviews: 143, badge: null,
-    descAr: 'واقي شمس طبيعي خفيف بلا أثر أبيض يحمي بشرتك من الأشعة الضارة مع ترطيب فائق.',
-    descFr: 'Protection solaire naturelle légère sans résidu blanc pour une peau protégée et hydratée.',
-    ingredients: ['Zinc Oxide', 'Titanium Dioxide', 'Hyaluronic Acid', 'Niacinamide'],
-    how_to_useAr: 'ضعي كمية كافية على الوجه قبل 15 دقيقة من التعرض للشمس.',
-    how_to_useFr: 'Appliquez sur le visage 15 min avant l\'exposition au soleil.',
-    bg: 'linear-gradient(135deg,#fff8e1,#ffecb3)', new: false
+    descAr: 'واقي شمس طبيعي خفيف SPF50+.',
+    descFr: 'Protection solaire naturelle légère SPF50+.',
+    ingredients: ['Zinc Oxide', 'Titanium Dioxide'],
+    how_to_useAr: '', how_to_useFr: '',
+    bg: 'linear-gradient(135deg,#fff8e1,#ffecb3)', new: false, outOfStock: true
   },
   {
     id: 6,
     nameAr: 'مرطب الشفاه بالأرغان', nameFr: 'Baume Lèvres à l\'Argan',
     cat: 'lips', catAr: 'شفاه', catFr: 'Lèvres',
     price: 55, oldPrice: null,
-    img: uimg('1586495777744-4e6232bf2c85'),
+    img: uimg('1625093742435-6fa192b6fb10'),
     emoji: '💋', rating: 4.7, reviews: 76, badge: null,
-    descAr: 'بلسم شفاه طبيعي 100% بزيت الأرغان والشيا لشفاه ناعمة ومرطبة طوال اليوم.',
-    descFr: 'Baume lèvres 100% naturel à l\'huile d\'Argan et au Beurre de Karité pour des lèvres douces.',
-    ingredients: ['Argan Oil', 'Shea Butter', 'Beeswax', 'Vitamin E'],
-    how_to_useAr: 'ضعي على الشفاه عند الحاجة طوال اليوم.',
-    how_to_useFr: 'Appliquez sur les lèvres autant de fois que nécessaire.',
-    bg: 'linear-gradient(135deg,#fce4ec,#f8bbd9)', new: false
+    descAr: 'بلسم شفاه طبيعي 100% بزيت الأرغان.',
+    descFr: 'Baume lèvres 100% naturel à l\'huile d\'Argan.',
+    ingredients: ['Argan Oil', 'Shea Butter'],
+    how_to_useAr: '', how_to_useFr: '',
+    bg: 'linear-gradient(135deg,#fce4ec,#f8bbd9)', new: false, outOfStock: true
   },
   {
     id: 7,
     nameAr: 'ماسك الطين المنقي', nameFr: 'Masque à l\'Argile Purifiante',
     cat: 'mask', catAr: 'أقنعة', catFr: 'Masques',
-    price: 99, oldPrice: 130,
+    price: 99, oldPrice: null,
     img: uimg('1616394584738-fc6e612e71b9'),
-    emoji: '🌿', rating: 4.7, reviews: 94, badge: 'sale',
-    descAr: 'قناع الطين الأخضر المنقي يمتص الزيوت الزائدة ويزيل الشوائب لبشرة نظيفة ومتوازنة وناعمة.',
-    descFr: 'Masque à l\'argile verte absorbant les excès de sébum pour une peau purifiée, équilibrée et douce.',
-    ingredients: ['Kaolin Clay', 'Green Clay', 'Tea Tree Oil', 'Aloe Vera Bio', 'Zinc'],
-    how_to_useAr: 'ضعي طبقة متساوية على الوجه النظيف واتركيها 10-15 دقيقة ثم اشطفي بالماء الدافئ.',
-    how_to_useFr: 'Appliquez une couche uniforme sur le visage propre, laissez 10-15 min puis rincez à l\'eau tiède.',
-    bg: 'linear-gradient(135deg,#e8f5e9,#c8e6c9)', new: false
+    emoji: '🌿', rating: 4.7, reviews: 94, badge: null,
+    descAr: 'قناع الطين الأخضر المنقي.',
+    descFr: 'Masque à l\'argile verte purifiante.',
+    ingredients: ['Kaolin Clay', 'Green Clay', 'Tea Tree Oil'],
+    how_to_useAr: '', how_to_useFr: '',
+    bg: 'linear-gradient(135deg,#e8f5e9,#c8e6c9)', new: false, outOfStock: true
   },
   {
     id: 8,
     nameAr: 'زيت الشعر بالأرغان', nameFr: 'Huile Capillaire à l\'Argan',
     cat: 'hair', catAr: 'عناية بالشعر', catFr: 'Soins capillaires',
-    price: 129, oldPrice: 160,
+    price: 129, oldPrice: null,
     img: uimg('1527799820374-dcf8d9d4a388'),
-    emoji: '💛', rating: 4.9, reviews: 187, badge: 'popular',
-    descAr: 'زيت الأرغان المغربي الأصيل 100% لشعر لامع وصحي وناعم. يرطب ويحمي ويمنع التقصف.',
-    descFr: 'Huile d\'Argan marocaine 100% pure pour des cheveux brillants, sains et doux. Hydrate, protège et prévient la casse.',
-    ingredients: ['Argan Oil 100% Pure', 'Vitamin E', 'Omega 6', 'Omega 9'],
-    how_to_useAr: 'ضعي بضع قطرات على الشعر الرطب أو الجاف من الأطراف إلى المنتصف.',
-    how_to_useFr: 'Appliquez quelques gouttes sur cheveux humides ou secs des pointes vers le milieu.',
-    bg: 'linear-gradient(135deg,#fff8e1,#ffecb3)', new: false
+    emoji: '💛', rating: 4.9, reviews: 187, badge: null,
+    descAr: 'زيت الأرغان المغربي 100% للشعر.',
+    descFr: 'Huile d\'Argan marocaine 100% pure.',
+    ingredients: ['Argan Oil 100% Pure', 'Vitamin E'],
+    how_to_useAr: '', how_to_useFr: '',
+    bg: 'linear-gradient(135deg,#fff8e1,#ffecb3)', new: false, outOfStock: true
   },
 ];
 
@@ -454,16 +611,10 @@ const TESTIMONIALS = [
   { initials: 'ل', nameAr: 'ليلى المسعودي', nameFr: 'Leila Massoudi', locationAr: 'الدار البيضاء، المغرب', locationFr: 'Casablanca, Maroc', rating: 5, textAr: 'الخدمة ممتازة والمنتجات عالية الجودة. وصل الطلب بسرعة كبيرة والتغليف فاخر جداً. سأشتري دائماً من إكلاريا.', textFr: 'Service excellent et produits de haute qualité. Livraison très rapide et emballage luxueux. Je reviendrai toujours.' },
 ];
 
-const LIVE_ORDERS = [
-  { nameAr: 'سارة من الدار البيضاء', nameFr: 'Sara de Casablanca', productAr: 'سيروم فيتامين سي', productFr: 'Sérum Vitamine C', emoji: '✨', time: '2 min' },
-  { nameAr: 'نور من الرباط', nameFr: 'Nour de Rabat', productAr: 'كريم الورد الفاخر', productFr: 'Crème Rose Luxe', emoji: '🌹', time: '5 min' },
-  { nameAr: 'هند من مراكش', nameFr: 'Hind de Marrakech', productAr: 'زيت الأرغان الملكي', productFr: 'Huile Argan Royale', emoji: '💛', time: '8 min' },
-  { nameAr: 'رانيا من فاس', nameFr: 'Rania de Fès', productAr: 'مجموعة العناية الليلية', productFr: 'Set Soins de Nuit', emoji: '🌙', time: '12 min' },
-];
 
 const FAQS = [
   { qAr: 'هل منتجات إكلاريا طبيعية 100%؟', qFr: 'Les produits ECLARYA sont-ils 100% naturels ?', aAr: 'نعم، نحن ملتزمون باستخدام أجود المكونات الطبيعية في جميع منتجاتنا. تخضع جميع منتجاتنا لاختبارات صارمة للجودة والسلامة.', aFr: 'Oui, nous nous engageons à utiliser les meilleurs ingrédients naturels dans tous nos produits, soumis à des tests stricts de qualité et de sécurité.' },
-  { qAr: 'ما هي مدة التوصيل؟', qFr: 'Quel est le délai de livraison ?', aAr: 'نوصل إلى جميع أنحاء المغرب خلال 24 إلى 72 ساعة من تأكيد الطلب. الشحن مجاني للطلبات فوق 300 درهم.', aFr: 'Nous livrons partout au Maroc en 24 à 72h après confirmation de commande. Livraison gratuite pour les commandes supérieures à 300 DH.' },
+  { qAr: 'ما هي مدة التوصيل؟', qFr: 'Quel est le délai de livraison ?', aAr: 'نوصل إلى جميع أنحاء المغرب خلال 24 إلى 72 ساعة من تأكيد الطلب. التوصيل مجاني لجميع الطلبات والدفع عند الاستلام.', aFr: 'Nous livrons partout au Maroc en 24 à 72h après confirmation de commande. Livraison gratuite pour toutes les commandes, paiement à la livraison.' },
   { qAr: 'هل يمكنني إرجاع المنتج إذا لم يناسبني؟', qFr: 'Puis-je retourner un produit s\'il ne me convient pas ?', aAr: 'بالتأكيد! نقبل الإرجاع خلال 14 يوماً من استلام الطلب، شريطة أن يكون المنتج سليماً ولم يُستخدم.', aFr: 'Absolument ! Nous acceptons les retours dans les 14 jours suivant la réception, à condition que le produit soit intact et non utilisé.' },
   { qAr: 'هل منتجاتكم مناسبة للبشرة الحساسة؟', qFr: 'Vos produits conviennent-ils aux peaux sensibles ?', aAr: 'معظم منتجاتنا مناسبة للبشرة الحساسة. كل منتج يحمل معلومات تفصيلية عن مكوناته. ننصح باستشارة خبرائنا عبر واتساب لاختيار المنتج المناسب لنوع بشرتك.', aFr: 'La plupart de nos produits conviennent aux peaux sensibles. Chaque produit contient des informations détaillées sur ses ingrédients. Nous vous recommandons de consulter nos experts via WhatsApp.' },
   { qAr: 'كيف أتواصل معكم؟', qFr: 'Comment vous contacter ?', aAr: 'يمكنك التواصل معنا عبر واتساب على الرقم 0661600929، أو عبر البريد الإلكتروني ouazatnet@gmail.com، أو من خلال نموذج الاتصال على موقعنا.', aFr: 'Vous pouvez nous contacter via WhatsApp au 0661600929, par e-mail à ouazatnet@gmail.com, ou via le formulaire de contact de notre site.' },
@@ -488,39 +639,13 @@ function setLang(lang) {
 }
 
 // ---- Cart ----
-function saveCart() { localStorage.setItem('eclarya-cart', JSON.stringify(state.cart)); }
 function saveWishlist() { localStorage.setItem('eclarya-wishlist', JSON.stringify(state.wishlist)); }
 
-function updateCartCount() {
-  const total = state.cart.reduce((s, i) => s + i.qty, 0);
-  $$('.cart-count').forEach(el => { el.textContent = total; el.style.display = total ? 'flex' : 'none'; });
-}
-
-function addToCart(productId, qty = 1) {
-  const product = PRODUCTS.find(p => p.id === productId);
-  if (!product) return;
-  const existing = state.cart.find(i => i.id === productId);
-  if (existing) existing.qty += qty;
-  else state.cart.push({ id: productId, qty });
-  saveCart();
-  updateCartCount();
-  showNotification('🛒 ' + t('add_success'));
-  renderCartItems();
-}
-
-function removeFromCart(productId) {
-  state.cart = state.cart.filter(i => i.id !== productId);
-  saveCart();
-  updateCartCount();
-  renderCartItems();
-}
-
-function updateCartQty(productId, delta) {
-  const item = state.cart.find(i => i.id === productId);
-  if (!item) return;
-  item.qty = Math.max(1, item.qty + delta);
-  saveCart();
-  renderCartItems();
+function orderNow(productId, qty = 1) {
+  const p = PRODUCTS.find(p => p.id === productId);
+  if (!p) return;
+  state.orderProduct = { product: p, qty };
+  navigateTo('checkout');
 }
 
 function toggleWishlist(productId) {
@@ -530,75 +655,7 @@ function toggleWishlist(productId) {
   saveWishlist();
 }
 
-function getCartTotal() {
-  return state.cart.reduce((sum, item) => {
-    const p = PRODUCTS.find(p => p.id === item.id);
-    return sum + (p ? p.price * item.qty : 0);
-  }, 0);
-}
-
-function renderCartItems() {
-  const container = $('#cart-items');
-  if (!container) return;
-
-  if (state.cart.length === 0) {
-    container.innerHTML = `
-      <div class="cart-empty">
-        <div class="empty-icon">🛒</div>
-        <p>${t('cart_empty')}</p>
-        <p class="text-gray">${t('cart_empty_sub')}</p>
-      </div>`;
-    updateCartSummary();
-    return;
-  }
-
-  container.innerHTML = state.cart.map(item => {
-    const p = PRODUCTS.find(p => p.id === item.id);
-    if (!p) return '';
-    const name = state.lang === 'ar' ? p.nameAr : p.nameFr;
-    return `
-      <div class="cart-item">
-        <div class="cart-item-img" style="background:${p.bg}">${p.emoji}</div>
-        <div class="cart-item-info">
-          <div class="cart-item-name">${name}</div>
-          <div class="cart-item-price">${p.price} ${t('drh')}</div>
-          <div class="cart-item-controls">
-            <div class="cart-qty-btn" onclick="updateCartQty(${p.id}, -1)">−</div>
-            <span class="cart-qty-num">${item.qty}</span>
-            <div class="cart-qty-btn" onclick="updateCartQty(${p.id}, 1)">+</div>
-            <div class="cart-item-remove" onclick="removeFromCart(${p.id})" title="Remove">✕</div>
-          </div>
-        </div>
-      </div>`;
-  }).join('');
-  updateCartSummary();
-}
-
-function updateCartSummary() {
-  const subtotal = getCartTotal();
-  const shipping = subtotal >= 300 ? 0 : 30;
-  const total = subtotal + shipping;
-  const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
-  set('cart-subtotal', subtotal + ' ' + t('drh'));
-  set('cart-shipping', shipping === 0 ? t('free') : shipping + ' ' + t('drh'));
-  set('cart-total', total + ' ' + t('drh'));
-  set('checkout-subtotal', subtotal + ' ' + t('drh'));
-  set('checkout-shipping', shipping === 0 ? t('free') : shipping + ' ' + t('drh'));
-  set('checkout-total', total + ' ' + t('drh'));
-}
-
-function openCart() {
-  renderCartItems();
-  $('#cart-overlay').classList.add('open');
-  $('#cart-drawer').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeCart() {
-  $('#cart-overlay').classList.remove('open');
-  $('#cart-drawer').classList.remove('open');
-  document.body.style.overflow = '';
-}
+function closeCart() {}
 
 // ---- Notification ----
 function showNotification(msg) {
@@ -609,7 +666,13 @@ function showNotification(msg) {
 }
 
 // ---- Pages ----
+const HOME_PAGES = ['home'];
+let navHistory = [];
+
 function navigateTo(page, data = null) {
+  const prev = state.currentPage;
+  if (prev && prev !== page) navHistory.push({ page: prev, data: state.currentProduct });
+
   state.currentPage = page;
   state.currentProduct = data;
   $$('.page').forEach(p => p.classList.remove('active'));
@@ -622,7 +685,30 @@ function navigateTo(page, data = null) {
   if (page === 'products') renderProductsPage();
   if (page === 'product-detail' && data) renderProductDetail(data);
   if (page === 'checkout') renderCheckout();
+
+  updateBackBtn();
 }
+
+function goBack() {
+  if (!navHistory.length) return navigateTo('home');
+  const prev = navHistory.pop();
+  navigateTo(prev.page, prev.data);
+  navHistory.pop(); // remove the re-push caused by navigateTo above
+  updateBackBtn();
+}
+
+function updateBackBtn() {
+  const btn = document.getElementById('back-btn');
+  if (!btn) return;
+  const showBack = navHistory.length > 0 && !HOME_PAGES.includes(state.currentPage);
+  btn.style.display = showBack ? 'flex' : 'none';
+  const isAr = state.lang === 'ar';
+  btn.innerHTML = isAr
+    ? `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg> رجوع`
+    : `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Retour`;
+}
+
+window.goBack = goBack;
 
 // ---- Hero Slider ----
 let slideIndex = 0;
@@ -689,8 +775,29 @@ function renderProductCard(p, full = false) {
     : `<div class="product-img-bg" style="background:${p.bg}"></div><div class="product-img-placeholder">${p.emoji}</div>`;
 
   const freeShip = state.lang === 'ar' ? '✓ توصيل مجاني' : '✓ Livraison gratuite';
-  const addCartLabel = state.lang === 'ar' ? '+ أضف للسلة' : '+ Ajouter';
-  const detailLabel = state.lang === 'ar' ? 'عرض التفاصيل' : 'Voir détails';
+  const addCartLabel = state.lang === 'ar' ? '🛒 اطلب الآن' : '🛒 Commander';
+  const outOfStockLabel = state.lang === 'ar' ? 'غير متوفر' : 'Indisponible';
+
+  if (p.outOfStock) {
+    return `
+      <div class="product-card product-card-oos">
+        <div class="product-img-wrap">
+          ${imgHtml}
+          <div class="product-badges">${badgeHtml}</div>
+          <div class="oos-overlay"><span class="oos-label">${outOfStockLabel}</span></div>
+        </div>
+        <div class="product-info">
+          <div class="product-cat">${cat}</div>
+          <div class="product-name">${name}</div>
+          <div class="product-price-row" style="opacity:0.45">
+            <div><span class="price-main">${p.price} ${t('drh')}</span></div>
+          </div>
+          <div class="product-card-actions">
+            <button class="btn-card-oos" disabled>${outOfStockLabel}</button>
+          </div>
+        </div>
+      </div>`;
+  }
 
   return `
     <div class="product-card" data-id="${p.id}">
@@ -715,8 +822,7 @@ function renderProductCard(p, full = false) {
           <span class="free-ship-badge">${freeShip}</span>
         </div>
         <div class="product-card-actions">
-          <button class="btn-card-detail" onclick="(function(e){e.stopPropagation();navigateTo('product-detail',PRODUCTS.find(x=>x.id===${p.id}));})(event)">${detailLabel}</button>
-          <button class="btn-card-cart add-to-cart" onclick="addToCart(${p.id})">${addCartLabel}</button>
+          <button class="btn-card-cart" style="flex:1" onclick="(function(e){e.stopPropagation();orderNow(${p.id});})(event)">${addCartLabel}</button>
         </div>
       </div>
     </div>`;
@@ -736,7 +842,7 @@ window.handleWishlist = handleWishlist;
 function renderFeaturedProducts() {
   const grid = $('#featured-grid');
   if (!grid) return;
-  const featured = PRODUCTS.filter(p => p.badge === 'popular' || p.badge === 'new').slice(0, 4);
+  const featured = PRODUCTS.filter(p => p.id === 1 || p.id === 2 || p.id === 3);
   grid.innerHTML = featured.map(p => renderProductCard(p)).join('');
   addProductCardListeners(grid);
 }
@@ -834,8 +940,7 @@ function renderProductDetail(p) {
           </div>
         </div>
         <div class="detail-actions">
-          <button class="btn btn-gold btn-lg" onclick="addToCart(${p.id}, parseInt($('#detail-qty').textContent))">🛒 ${t('add_to_cart_full')}</button>
-          <a href="https://wa.me/212661600929?text=${encodeURIComponent((state.lang === 'ar' ? 'أريد طلب: ' : 'Je veux commander: ') + name)}" target="_blank" class="btn btn-whatsapp btn-lg">💬 ${t('whatsapp_order')}</a>
+          <button class="btn btn-gold btn-lg" style="flex:1" onclick="orderNow(${p.id}, parseInt(document.getElementById('detail-qty').textContent))">🛒 ${state.lang === 'ar' ? 'اطلب الآن' : 'Commander maintenant'}</button>
         </div>
         <div class="product-tabs" style="margin-top:32px">
           <div class="tab-nav">
@@ -843,9 +948,56 @@ function renderProductDetail(p) {
             <button class="tab-btn" onclick="openTab('ingredients',this)">${t('ingredients')}</button>
             <button class="tab-btn" onclick="openTab('how',this)">${t('how_to_use')}</button>
           </div>
-          <div class="tab-content active" id="tab-desc"><p>${desc}</p></div>
-          <div class="tab-content" id="tab-ingredients"><div class="ingredients-list">${ingredientsTags}</div></div>
-          <div class="tab-content" id="tab-how"><p>${howToUse}</p></div>
+          <div class="tab-content active" id="tab-desc">
+            ${(() => {
+              const isAr = state.lang === 'ar';
+              const fullDesc = isAr ? p.fullDescAr : p.fullDescFr;
+              const benefits = isAr ? p.benefitsAr : p.benefitsFr;
+              const info = p.productInfoAr;
+              const storage = p.storageAr;
+              if (!fullDesc) return `<p>${desc}</p>`;
+              return `
+                <p style="line-height:1.9;margin-bottom:20px">${fullDesc.replace(/\n\n/g,'</p><p style="line-height:1.9;margin-bottom:20px">')}</p>
+                ${benefits ? `<div class="detail-benefits">
+                  <h4 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--gold)">🌿 ${isAr ? 'فوائد المنتج' : 'Bénéfices'}</h4>
+                  <ul class="benefits-list">${benefits.map(b => `<li>✅ ${b}</li>`).join('')}</ul>
+                </div>` : ''}
+                ${info ? `<div class="detail-info-box">
+                  <h4 style="font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--gold)">📦 ${isAr ? 'معلومات المنتج' : 'Infos produit'}</h4>
+                  <table class="info-table">
+                    <tr><td>${isAr ? 'النوع' : 'Type'}</td><td>${info.type}</td></tr>
+                    <tr><td>${isAr ? 'الاستعمال' : 'Usage'}</td><td>${info.use}</td></tr>
+                    <tr><td>${isAr ? 'اللون' : 'Couleur'}</td><td>${info.color}</td></tr>
+                    <tr><td>${isAr ? 'القوام' : 'Texture'}</td><td>${info.texture}</td></tr>
+                    <tr><td>${isAr ? 'السعة' : 'Volume'}</td><td>${info.size}</td></tr>
+                    <tr><td>${isAr ? 'الصلاحية' : 'Durée'}</td><td>${info.shelf}</td></tr>
+                  </table>
+                </div>` : ''}
+                ${storage ? `<div class="detail-storage">
+                  <h4 style="font-size:1rem;font-weight:700;margin-bottom:10px;color:var(--gold)">⚠️ ${isAr ? 'إرشادات الحفظ' : 'Conservation'}</h4>
+                  <ul class="storage-list">${storage.map(s => `<li>${s}</li>`).join('')}</ul>
+                </div>` : ''}`;
+            })()}
+          </div>
+          <div class="tab-content" id="tab-ingredients">
+            ${(() => {
+              const isAr = state.lang === 'ar';
+              const full = p.fullIngredientsAr;
+              if (!full) return `<div class="ingredients-list">${ingredientsTags}</div>`;
+              return `<ul class="full-ingredients-list">${full.map(i => `<li>${i}</li>`).join('')}</ul>`;
+            })()}
+          </div>
+          <div class="tab-content" id="tab-how">
+            ${(() => {
+              const isAr = state.lang === 'ar';
+              const steps = isAr ? p.stepsAr : p.stepsFr;
+              const tip = isAr ? p.tipAr : p.tipFr;
+              if (!steps) return `<p>${howToUse}</p>`;
+              return `
+                <ol class="how-steps">${steps.map(s => `<li>${s}</li>`).join('')}</ol>
+                ${tip ? `<div class="how-tip">💡 <strong>${isAr ? 'نصيحة:' : 'Conseil :'}</strong> ${tip}</div>` : ''}`;
+            })()}
+          </div>
         </div>
       </div>
     </div>
@@ -880,23 +1032,62 @@ function renderCheckout() {
   const orderItems = $('#order-items');
   if (!orderItems) return;
 
-  if (state.cart.length === 0) {
-    navigateTo('products');
-    return;
-  }
+  const op = state.orderProduct;
+  if (!op) { navigateTo('products'); return; }
 
-  orderItems.innerHTML = state.cart.map(item => {
-    const p = PRODUCTS.find(p => p.id === item.id);
-    if (!p) return '';
-    const name = state.lang === 'ar' ? p.nameAr : p.nameFr;
-    return `
-      <div class="order-item">
-        <div class="order-item-img" style="background:${p.bg}">${p.emoji}</div>
-        <div class="order-item-name">${name} × ${item.qty}</div>
-        <div class="order-item-price">${p.price * item.qty} ${t('drh')}</div>
-      </div>`;
-  }).join('');
-  updateCartSummary();
+  const p = op.product;
+  const name = state.lang === 'ar' ? p.nameAr : p.nameFr;
+  const subtotal = p.price * op.qty;
+
+  const imgHtml = p.img
+    ? `<img src="${p.img}" alt="${name}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" />`
+    : `<span style="font-size:2rem">${p.emoji}</span>`;
+
+  orderItems.innerHTML = `
+    <div class="order-item">
+      <div class="order-item-img" style="background:${p.bg};overflow:hidden">${imgHtml}</div>
+      <div class="order-item-name">${name} × ${op.qty}</div>
+      <div class="order-item-price">${subtotal} ${t('drh')}</div>
+    </div>`;
+
+  const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  set('checkout-subtotal', subtotal + ' ' + t('drh'));
+  set('checkout-total', subtotal + ' ' + t('drh'));
+
+  // Product details below form
+  const detailBox = document.getElementById('checkout-product-detail');
+  if (!detailBox) return;
+  const isAr = state.lang === 'ar';
+  const desc = isAr ? (p.fullDescAr || p.descAr) : (p.fullDescFr || p.descFr);
+  const benefits = isAr ? p.benefitsAr : p.benefitsFr;
+  const ingredients = p.fullIngredientsAr || p.ingredients || [];
+  const steps = isAr ? p.stepsAr : p.stepsFr;
+  const tip = isAr ? p.tipAr : p.tipFr;
+
+  detailBox.innerHTML = `
+    <div class="checkout-detail-section">
+      <div class="checkout-detail-img">
+        ${p.img ? `<img src="${p.img}" alt="${name}" />` : `<span style="font-size:5rem">${p.emoji}</span>`}
+      </div>
+      <h3 class="checkout-detail-title">${name}</h3>
+      <p class="checkout-detail-desc">${desc ? desc.replace(/\n\n/g,'<br><br>') : ''}</p>
+      ${benefits ? `
+        <div class="checkout-detail-block">
+          <h4>🌿 ${isAr ? 'فوائد المنتج' : 'Bénéfices'}</h4>
+          <ul>${benefits.map(b => `<li>✅ ${b}</li>`).join('')}</ul>
+        </div>` : ''}
+      ${ingredients.length ? `
+        <div class="checkout-detail-block">
+          <h4>🧪 ${isAr ? 'المكونات' : 'Ingrédients'}</h4>
+          <div class="checkout-ingredients">${ingredients.map(i => `<span>${i}</span>`).join('')}</div>
+        </div>` : ''}
+      ${steps ? `
+        <div class="checkout-detail-block">
+          <h4>📖 ${isAr ? 'طريقة الاستعمال' : 'Mode d\'emploi'}</h4>
+          <ol>${steps.map(s => `<li>${s}</li>`).join('')}</ol>
+          ${tip ? `<div class="how-tip" style="margin-top:12px">💡 <strong>${isAr ? 'نصيحة:' : 'Conseil :'}</strong> ${tip}</div>` : ''}
+        </div>` : ''}
+    </div>`;
 }
 
 // ---- Testimonials Slider ----
@@ -952,22 +1143,6 @@ window.goTestimonial = function(i) {
   changeTestimonial(0);
 };
 
-// ---- Live Orders ----
-let liveOrderIdx = 0;
-function showLiveOrder() {
-  const popup = document.getElementById('live-order-popup');
-  if (!popup) return;
-  const order = LIVE_ORDERS[liveOrderIdx % LIVE_ORDERS.length];
-  const name = state.lang === 'ar' ? order.nameAr : order.nameFr;
-  const product = state.lang === 'ar' ? order.productAr : order.productFr;
-  popup.querySelector('.live-order-icon').textContent = order.emoji;
-  popup.querySelector('.live-order-name').textContent = name;
-  popup.querySelector('.live-order-product').textContent = product;
-  popup.querySelector('.live-order-time').textContent = state.lang === 'ar' ? `منذ ${order.time}` : `il y a ${order.time}`;
-  popup.classList.add('show');
-  setTimeout(() => popup.classList.remove('show'), 4000);
-  liveOrderIdx++;
-}
 
 // ---- Render All (for lang switch) ----
 function renderAll() {
@@ -988,7 +1163,6 @@ function renderAll() {
   if (state.currentPage === 'checkout') renderCheckout();
   renderContactInfo();
   renderBookingForm();
-  updateCartCount();
 }
 
 function renderNavText() {
@@ -1138,20 +1312,60 @@ function initForms() {
     });
   }
 
-  // Checkout
-  const checkoutForm = document.getElementById('checkout-form');
-  if (checkoutForm) {
-    checkoutForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const orderNum = 'EC-' + Date.now().toString().slice(-6);
-      document.getElementById('order-number').textContent = '#' + orderNum;
-      document.getElementById('page-checkout').classList.remove('active');
-      document.getElementById('page-success').classList.add('active');
-      state.cart = [];
-      saveCart();
-      updateCartCount();
-    });
+}
+
+function submitCheckoutOrder() {
+  const form = document.getElementById('checkout-form');
+  if (!form) return;
+
+  const inputs = form.querySelectorAll('input[type=text],input[type=tel]');
+  const name    = inputs[0] ? inputs[0].value.trim() : '';
+  const phone   = inputs[1] ? inputs[1].value.trim() : '';
+  const address = inputs[2] ? inputs[2].value.trim() : '';
+  const city    = inputs[3] ? inputs[3].value.trim() : '';
+
+  if (!name || !phone || !address || !city) {
+    showNotification('⚠️ ' + (state.lang === 'ar' ? 'يرجى ملء جميع الحقول المطلوبة' : 'Veuillez remplir tous les champs obligatoires'));
+    return;
   }
+
+  const notes = (document.getElementById('checkout-notes') || {}).value || '';
+  const op = state.orderProduct;
+  const pName = op ? (state.lang === 'ar' ? op.product.nameAr : op.product.nameFr) : '';
+  const price = op ? op.product.price * op.qty : 0;
+
+  const msgLines = [
+    '🛍️ *طلب جديد — ECLARYA*',
+    '',
+    '👤 *معلومات الزبون:*',
+    `• الاسم: ${name}`,
+    `• الهاتف: ${phone}`,
+    `• العنوان: ${address}`,
+    `• المدينة: ${city}`,
+  ];
+  if (notes) msgLines.push(`• ملاحظات: ${notes}`);
+  msgLines.push(
+    '',
+    '📦 *تفاصيل الطلب:*',
+    `• المنتج: ${pName}`,
+    `• الكمية: ${op ? op.qty : 1}`,
+    `• السعر: ${price} درهم`,
+    '',
+    '🚚 التوصيل: *مجاني لجميع أنحاء المغرب*',
+    '💰 الدفع: *عند الاستلام*',
+    `💵 *الإجمالي: ${price} درهم*`,
+  );
+
+  const msg = msgLines.join('\n');
+  window.location.href = 'https://wa.me/212661600929?text=' + encodeURIComponent(msg);
+
+  setTimeout(() => {
+    const orderNum = 'EC-' + Date.now().toString().slice(-6);
+    document.getElementById('order-number').textContent = '#' + orderNum;
+    document.getElementById('page-checkout').classList.remove('active');
+    document.getElementById('page-success').classList.add('active');
+    state.orderProduct = null;
+  }, 500);
 }
 
 // ---- Search ----
@@ -1194,15 +1408,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHamburger();
   initForms();
   renderAll();
-  updateCartCount();
 
-  // Cart overlay close
-  const overlay = document.getElementById('cart-overlay');
-  if (overlay) overlay.addEventListener('click', closeCart);
-
-  // Live orders rotation
-  setTimeout(showLiveOrder, 3000);
-  setInterval(showLiveOrder, 9000);
 
   // Slideshow init after lang
   setTimeout(initSlider, 100);
@@ -1210,10 +1416,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Expose globals
 window.navigateTo = navigateTo;
-window.addToCart = addToCart;
-window.removeFromCart = removeFromCart;
-window.updateCartQty = updateCartQty;
-window.openCart = openCart;
+window.orderNow = orderNow;
 window.closeCart = closeCart;
 window.changeSlide = changeSlide;
 window.goSlide = goSlide;

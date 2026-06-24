@@ -28,7 +28,7 @@
 /* ---- Base ---- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: var(--black); }
 
 body {
   font-family: 'Tajawal', 'Nunito', sans-serif;
@@ -142,6 +142,32 @@ p { font-size: 1rem; line-height: 1.8; }
 }
 .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.55); }
 
+/* Product detail rich content */
+.benefits-list { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 8px; }
+.benefits-list li { font-size: 0.92rem; line-height: 1.6; color: var(--text-dark); }
+.detail-benefits, .detail-info-box, .detail-storage { margin-bottom: 24px; }
+.info-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.info-table tr { border-bottom: 1px solid var(--border); }
+.info-table td { padding: 8px 10px; }
+.info-table td:first-child { color: #888; width: 40%; }
+.info-table td:last-child { font-weight: 600; }
+.storage-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.storage-list li { font-size: 0.88rem; color: #555; padding-right: 16px; position: relative; }
+.storage-list li::before { content: '•'; position: absolute; right: 0; color: var(--gold); }
+.full-ingredients-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.full-ingredients-list li { font-size: 0.88rem; color: var(--text-dark); padding: 7px 12px; background: var(--off-white); border-radius: 8px; }
+.how-steps { padding-right: 20px; display: flex; flex-direction: column; gap: 12px; margin: 0 0 20px; }
+.how-steps li { font-size: 0.92rem; line-height: 1.7; color: var(--text-dark); }
+.how-tip { background: #fefce8; border: 1.5px solid #fde047; border-radius: 10px; padding: 12px 16px; font-size: 0.88rem; color: #713f12; line-height: 1.6; }
+
+.cod-info-box {
+  display: flex; align-items: center; gap: 10px;
+  background: #f0fdf4; border: 1.5px solid #86efac;
+  border-radius: 12px; padding: 14px 18px;
+  color: #15803d; font-size: 0.9rem; font-weight: 600;
+  margin-bottom: 18px;
+}
+
 /* ============================================
    SECTION HEADERS
    ============================================ */
@@ -189,6 +215,8 @@ p { font-size: 1rem; line-height: 1.8; }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; }
 
 .logo { display: flex; align-items: center; gap: 12px; }
+.logo-img-wrap { padding: 0; }
+.logo-img { height: 48px; width: auto; object-fit: contain; display: block; border-radius: 12px; }
 .logo-icon {
   width: 44px; height: 44px;
   background: linear-gradient(135deg, var(--gold-dark), var(--gold-light));
@@ -495,6 +523,43 @@ body.lang-fr .product-wish { left: auto; right: 12px; }
   border: none; font-family: inherit;
 }
 .btn-card-cart:hover { opacity: 0.88; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(34,197,94,0.35); }
+
+/* Checkout product detail */
+.checkout-detail-section { max-width: 700px; margin: 0 auto; }
+.checkout-detail-img { width: 100%; max-height: 340px; overflow: hidden; border-radius: var(--radius); margin-bottom: 24px; background: var(--off-white); display: flex; align-items: center; justify-content: center; }
+.checkout-detail-img img { width: 100%; object-fit: contain; max-height: 340px; }
+.checkout-detail-title { font-size: 1.4rem; font-weight: 700; margin-bottom: 14px; }
+.checkout-detail-desc { color: #555; line-height: 1.9; margin-bottom: 24px; font-size: 0.95rem; }
+.checkout-detail-block { margin-bottom: 24px; }
+.checkout-detail-block h4 { font-size: 1rem; font-weight: 700; color: var(--gold); margin-bottom: 12px; }
+.checkout-detail-block ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.checkout-detail-block ul li { font-size: 0.92rem; line-height: 1.6; }
+.checkout-detail-block ol { padding-right: 20px; display: flex; flex-direction: column; gap: 10px; }
+.checkout-detail-block ol li { font-size: 0.92rem; line-height: 1.7; }
+.checkout-ingredients { display: flex; flex-wrap: wrap; gap: 8px; }
+.checkout-ingredients span { background: var(--off-white); border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; color: var(--text-dark); }
+
+/* Out of stock */
+.product-card-oos { opacity: 0.82; pointer-events: none; }
+.oos-overlay {
+  position: absolute; inset: 0; z-index: 4;
+  background: rgba(0,0,0,0.42);
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 14px 14px 0 0;
+}
+.oos-label {
+  background: #fff; color: #1a1a1a;
+  font-size: 0.88rem; font-weight: 700;
+  padding: 7px 20px; border-radius: 30px;
+  letter-spacing: 0.5px;
+}
+.btn-card-oos {
+  flex: 1; padding: 9px 10px; border-radius: 10px;
+  background: #e5e7eb; color: #9ca3af;
+  font-size: 0.82rem; font-weight: 600;
+  border: none; font-family: inherit; cursor: not-allowed;
+  width: 100%;
+}
 
 .add-to-cart {
   width: 38px; height: 38px; border-radius: 50%;
@@ -1083,6 +1148,26 @@ body.lang-ar .live-order { left: auto; right: 24px; transform: translateX(120%);
 .live-order-text p { font-size: 0.8rem; font-weight: 700; color: var(--text-dark); margin-bottom: 2px; }
 .live-order-text span { font-size: 0.73rem; color: var(--gray); }
 
+/* Back Button */
+#back-btn {
+  position: fixed; bottom: 148px; right: 24px; z-index: 2400;
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 18px; border-radius: 30px;
+  background: var(--black); color: white;
+  font-size: 0.85rem; font-weight: 600;
+  border: none; cursor: pointer; font-family: inherit;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+  transition: transform 0.2s, opacity 0.2s;
+  animation: fadeInUp 0.3s ease;
+}
+#back-btn:hover { transform: translateY(-2px); opacity: 0.88; }
+body.lang-ar #back-btn { right: auto; left: 24px; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* WhatsApp Float */
 .whatsapp-float {
   position: fixed; bottom: 80px; right: 24px; z-index: 2500;
@@ -1133,6 +1218,7 @@ body.lang-ar .whatsapp-float { right: auto; left: 24px; }
   .booking-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
   .product-detail-grid { grid-template-columns: 1fr; }
+  .product-gallery { position: static !important; }
 }
 
 @media (max-width: 768px) {

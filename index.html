@@ -38,12 +38,8 @@
   <nav class="navbar">
     <div class="container nav-inner">
       <!-- Logo -->
-      <a href="#" class="logo" onclick="navigateTo('home')">
-        <div class="logo-icon">E</div>
-        <div class="logo-text">
-          <div class="brand">ECLARYA</div>
-          <div class="tagline">الجمال والرفاهية</div>
-        </div>
+      <a href="#" class="logo logo-img-wrap" onclick="navigateTo('home')">
+        <img src="assets/images/eclarya-logo.png" alt="Éclarya" class="logo-img" />
       </a>
 
       <!-- Nav Links -->
@@ -58,10 +54,6 @@
 
       <!-- Actions -->
       <div class="nav-actions">
-        <button class="nav-icon-btn" onclick="openCart()" title="السلة">
-          🛒
-          <span class="cart-count" style="display:none">0</span>
-        </button>
         <button class="hamburger" id="hamburger-btn">
           <span></span><span></span><span></span>
         </button>
@@ -102,15 +94,6 @@
             <button class="btn btn-outline btn-learn-more" onclick="navigateTo('about')">اعرفي المزيد</button>
           </div>
         </div>
-        <div class="slide-visual">
-          <div class="product-showcase">
-            <div class="glow-ring"></div>
-            <div class="glow-ring"></div>
-            <img src="assets/images/eclarya-products.jpg" alt="Éclarya" onerror="this.src='https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&h=500&q=85&auto=format&fit=crop'" style="width:240px;height:320px;object-fit:cover;border-radius:16px;position:relative;z-index:2;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5))" />
-            <div class="float-badge">🌿 AHA طبيعي</div>
-            <div class="float-badge">💧 سيروم العيون</div>
-          </div>
-        </div>
       </div>
 
       <!-- Slide 2: Eye Serum -->
@@ -126,15 +109,6 @@
             <button class="btn btn-outline btn-learn-more" onclick="navigateTo('product-detail',PRODUCTS[0])">عرض المنتج</button>
           </div>
         </div>
-        <div class="slide-visual">
-          <div class="product-showcase">
-            <div class="glow-ring"></div>
-            <div class="glow-ring"></div>
-            <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=500&q=85&auto=format&fit=crop" alt="Sérum" style="width:200px;height:300px;object-fit:cover;border-radius:16px;position:relative;z-index:2;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5))" />
-            <div class="float-badge">💧 Hyaluronic Acid</div>
-            <div class="float-badge">✨ Peptides</div>
-          </div>
-        </div>
       </div>
 
       <!-- Slide 3: Crème AHA -->
@@ -148,15 +122,6 @@
           <div class="slide-btns">
             <button class="btn btn-gold btn-lg btn-shop-now" onclick="navigateTo('products')">اطلبيه الآن</button>
             <button class="btn btn-outline btn-learn-more" onclick="navigateTo('booking')">استشارة مجانية</button>
-          </div>
-        </div>
-        <div class="slide-visual">
-          <div class="product-showcase">
-            <div class="glow-ring"></div>
-            <div class="glow-ring"></div>
-            <img src="https://images.unsplash.com/photo-1570194065650-d99fb4b8ccb0?w=400&h=500&q=85&auto=format&fit=crop" alt="Crème AHA" style="width:180px;height:320px;object-fit:cover;border-radius:16px;position:relative;z-index:2;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.5))" />
-            <div class="float-badge">🌿 AHA Complex</div>
-            <div class="float-badge">✅ Éclaircit & Illumine</div>
           </div>
         </div>
       </div>
@@ -178,7 +143,7 @@
   <div class="trust-bar">
     <div class="container">
       <div class="trust-items">
-        <div class="trust-item"><span class="icon">🚚</span> <span data-trust="1">شحن مجاني فوق 300 درهم</span></div>
+        <div class="trust-item"><span class="icon">🚚</span> <span data-trust="1">شحن مجاني لجميع الطلبات</span></div>
         <div class="trust-item"><span class="icon">✅</span> <span data-trust="2">منتجات أصيلة 100%</span></div>
         <div class="trust-item"><span class="icon">↩️</span> <span data-trust="3">إرجاع مجاني 14 يوم</span></div>
         <div class="trust-item"><span class="icon">🔒</span> <span data-trust="4">دفع آمن ومضمون</span></div>
@@ -298,9 +263,7 @@
   <section class="about-story">
     <div class="container">
       <div class="about-grid">
-        <div class="about-visual">
-          <span style="position:relative;z-index:1;font-size:8rem">💎</span>
-        </div>
+        <div class="about-visual" style="display:none"></div>
         <div class="about-text">
           <span class="badge" style="margin-bottom:16px">✦ قصتنا</span>
           <h2>إيكلاريا — <span class="text-gold">الجمال النابع من الطبيعة</span></h2>
@@ -668,8 +631,6 @@
     <div class="container">
       <a href="#" onclick="navigateTo('home')">الرئيسية</a>
       <span class="sep">›</span>
-      <a href="#" onclick="openCart()">السلة</a>
-      <span class="sep">›</span>
       <span>إتمام الشراء</span>
     </div>
   </div>
@@ -701,38 +662,20 @@
               <input type="text" placeholder="طنجة" required />
             </div>
 
-            <div class="section-divider">طريقة الدفع</div>
-            <div class="payment-methods">
-              <div class="payment-option">
-                <input type="radio" name="payment" id="pay-cod" value="cod" checked />
-                <label for="pay-cod">
-                  <span class="payment-icon">💵</span>
-                  الدفع عند الاستلام
-                </label>
-              </div>
-              <div class="payment-option">
-                <input type="radio" name="payment" id="pay-transfer" value="transfer" />
-                <label for="pay-transfer">
-                  <span class="payment-icon">🏦</span>
-                  تحويل بنكي
-                </label>
-              </div>
-              <div class="payment-option">
-                <input type="radio" name="payment" id="pay-whatsapp" value="whatsapp" />
-                <label for="pay-whatsapp">
-                  <span class="payment-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></span>
-                  واتساب
-                </label>
-              </div>
+            <div class="cod-info-box">
+              <span>💵</span>
+              <span>الدفع عند الاستلام — التوصيل مجاني في جميع أنحاء المغرب</span>
             </div>
 
             <div class="form-group">
               <label>ملاحظات إضافية (اختياري)</label>
-              <textarea placeholder="أي ملاحظات خاصة بطلبك..."></textarea>
+              <textarea id="checkout-notes" placeholder="أي ملاحظات خاصة بطلبك..."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-gold btn-full btn-lg" style="margin-top:8px">✅ تأكيد الطلب</button>
-            <a href="https://wa.me/212661600929" target="_blank" class="btn btn-whatsapp btn-full" style="margin-top:10px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="vertical-align:middle;margin-left:7px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> أو اطلبي عبر واتساب</a>
+            <button type="button" onclick="submitCheckoutOrder()" class="btn btn-whatsapp btn-full btn-lg" style="margin-top:8px;font-size:1rem">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="vertical-align:middle;margin-left:8px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              تأكيد الطلب عبر واتساب
+            </button>
           </form>
         </div>
 
@@ -744,7 +687,7 @@
           <div class="order-items" id="order-items"></div>
           <div class="order-totals">
             <div class="order-row"><span>المجموع الفرعي</span><span id="checkout-subtotal">0 درهم</span></div>
-            <div class="order-row"><span>الشحن</span><span id="checkout-shipping">30 درهم</span></div>
+            <div class="order-row"><span>الشحن</span><span id="checkout-shipping" style="color:#16a34a;font-weight:700">✓ مجاني</span></div>
             <div class="order-row total"><span>الإجمالي</span><span id="checkout-total">0 درهم</span></div>
           </div>
           <div class="trust-badges">
@@ -754,6 +697,11 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+  <section class="section" style="padding-top:0;padding-bottom:60px">
+    <div class="container">
+      <div id="checkout-product-detail"></div>
     </div>
   </section>
 </div><!-- /page-checkout -->
@@ -777,29 +725,6 @@
 <!-- ============================================
      CART DRAWER
      ============================================ -->
-<div class="cart-overlay" id="cart-overlay"></div>
-<div class="cart-drawer" id="cart-drawer">
-  <div class="cart-header">
-    <h3>🛒 <span class="cart-label">سلة الشراء</span></h3>
-    <button class="cart-close" onclick="closeCart()">✕</button>
-  </div>
-  <div class="cart-items" id="cart-items">
-    <div class="cart-empty">
-      <div class="empty-icon">🛒</div>
-      <p>سلتك فارغة</p>
-      <p class="text-gray">أضيفي منتجاتك المفضلة للسلة</p>
-    </div>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-summary">
-      <div class="cart-row"><span>المجموع الفرعي</span><span class="price-val" id="cart-subtotal">0 درهم</span></div>
-      <div class="cart-row"><span>الشحن</span><span class="price-val" id="cart-shipping">30 درهم</span></div>
-      <div class="cart-row total"><span>الإجمالي</span><span class="price-val" id="cart-total">0 درهم</span></div>
-    </div>
-    <button class="btn btn-gold btn-full btn-lg" onclick="closeCart();navigateTo('checkout')">✅ إتمام الشراء</button>
-    <button class="btn btn-dark btn-full" style="margin-top:10px" onclick="closeCart()">← متابعة التسوق</button>
-  </div>
-</div>
 
 <!-- ============================================
      FOOTER
@@ -875,6 +800,9 @@
      FLOATING ELEMENTS
      ============================================ -->
 
+<!-- Back Button -->
+<button id="back-btn" onclick="goBack()" style="display:none"></button>
+
 <!-- WhatsApp Float -->
 <a href="https://wa.me/212661600929?text=مرحباً، أريد الاستفسار عن منتجات إيكلاريا" target="_blank" class="whatsapp-float" title="تواصلي عبر واتساب"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
 
@@ -884,15 +812,6 @@
   <span class="notif-msg"></span>
 </div>
 
-<!-- Live Order Popup -->
-<div class="live-order" id="live-order-popup">
-  <div class="live-order-icon">✨</div>
-  <div class="live-order-text">
-    <p class="live-order-name">سارة من الدار البيضاء</p>
-    <span class="live-order-product">سيروم فيتامين سي</span><br>
-    <span class="live-order-time" style="font-size:0.72rem;color:var(--gray)">منذ 2 دقيقة</span>
-  </div>
-</div>
 
 <script src="assets/js/app.js"></script>
 </body>
